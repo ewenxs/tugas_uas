@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
 class KegiatanController extends Controller
-{public function index(Request $request)
+{
+    public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Kegiatan::select('*');
+            $sql = "select kegiatans.id as keg_id, kegiatans.kode_kegiatan, kegiatans.nama_kegiatan, bagians.nama_bagian";
+            $sql .= " from kegiatans left join bagians on kegiatans.bagian_id=bagians.id";
+            $data = DB::select($sql);
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -19,8 +23,8 @@ class KegiatanController extends Controller
                                             Action
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="kegiatan/'.$row->id.'/edit">Edit</a></li>
-                                            <form action="/kegiatan/'.$row->id.'" method="POST">
+                                            <li><a class="dropdown-item" href="kegiatan/'.$row->keg_id.'/edit">Edit</a></li>
+                                            <form action="/kegiatan/'.$row->keg_id.'" method="POST">
                                             '.csrf_field().'
                                             '.method_field("DELETE").'
                                             <input type="submit" class="dropdown-item" onclick="return confirm(\'Apakah anda yakin ?\')" value="Delete">
@@ -50,12 +54,14 @@ class KegiatanController extends Controller
     {
         $request->validate([
             'kode_kegiatan' => 'required|min:5',
-            'nama_kegiatan' => 'required|min:5'
+            'nama_kegiatan' => 'required|min:5',
+            'bagian_id' => 'required|min:1'
         ]);
 
         Kegiatan::create([
             'kode_kegiatan'=>$request->kode_kegiatan,
             'nama_kegiatan'=>$request->nama_kegiatan,
+            'bagian_id'=>$request->bagian_id,
         ]);
 
         return redirect('/kegiatan')->with('success','Data berhasil ditambahkan.');
@@ -63,7 +69,10 @@ class KegiatanController extends Controller
 
     public function edit($id){
         $kegiatan = Kegiatan::find($id);
-        return view('kegiatan.edit',compact(['kegiatan']));
+        $bagians = DB::table('kegiatans')        
+                    ->leftjoin('bagians', 'bagians.id', '=', 'kegiatans.bagian_id')
+                    ->get();
+        return view('kegiatan.edit',compact(['kegiatan', 'bagians']));
     }
 
     public function update(Request $request, $id){
@@ -75,6 +84,7 @@ class KegiatanController extends Controller
         $kegiatan->update([
             'kode_kegiatan'=>$request->kode_kegiatan,
             'nama_kegiatan'=>$request->nama_kegiatan,
+            'bagian_id'=>$request->bagian_id,
         ]);
 
         return redirect('/kegiatan')->with('success','Data berhasil diubah.');

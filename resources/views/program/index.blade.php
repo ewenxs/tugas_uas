@@ -3,18 +3,16 @@
 @section('content')
 <div class="card">
     <div class="card-header pb-0">
-    <h5>DATA KEGIATAN</h5>
-    <a href="/kegiatan/create" class="btn btn-primary float-end">Tambah Data</a><br/><br/><br/>
+    <h5>DATA PROGRAM</h5>
+    <a href="/program/create" class="btn btn-primary float-end">Tambah Data</a><br/><br/><br/>
     </div>
     <div class="container">
     <div class="table-responsive">
-      <table class="table" id="data_table_kegiatan">
+      <table class="table" id="data_table_program">
         <thead>
           <tr>
             <th>No</th>
-            <th>Kode Kegiatan</th>
-            <th>Nama Kegiatan</th>
-            <th>Nama Bagian</th>
+            <th>Nama Program</th>
             <th>Actions</th>
           </tr>
         </thead>

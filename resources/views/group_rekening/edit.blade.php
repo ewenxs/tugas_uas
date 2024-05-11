@@ -38,7 +38,7 @@
             </div>
             <div class="mb-3">
               <label for="exampleFormControlSelect1" class="form-label">Nama Rekening</label>
-              <select name="rekening_id[]" class="livesearch_rekening" id="rekening_multiple" multiple="multiple">
+              <select name="rekening_id[]" class="livesearch_daftar_rekening" id="rekening_multiple" multiple="multiple">
                 @foreach($list_rekening as $list_rek)
                   <option value="{{$list_rek->id }}" selected> {{$list_rek->nama_rekening}}</option>
                   @endforeach

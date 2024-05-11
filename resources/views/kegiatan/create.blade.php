@@ -19,6 +19,11 @@
           <form action="/kegiatan" method="POST">
             @csrf
             <div class="mb-3">
+              <label for="exampleFormControlSelect1" class="form-label">Nama Bagian</label>
+              <select name ="bagian_id" class="livesearch_bagian form-select" aria-label="Default select example">  
+              </select>
+            </div>
+            <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">Kode Kegiatan</label>
               <input name="kode_kegiatan" type="text" class="form-control" id="basic-default-fullname" placeholder="Kode Kegiatan">
             </div><div class="mb-3">

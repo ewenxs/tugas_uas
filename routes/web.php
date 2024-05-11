@@ -2,10 +2,15 @@
 
 use App\Http\Controllers\BagianController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DpaController;
+use App\Http\Controllers\PenjabaranController;
 use App\Http\Controllers\Group_rekeningController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\Select2Controller;
 use App\Http\Controllers\Sub_kegiatanController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +39,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/bagian/{id}',[BagianController::class,'update']);
     Route::delete('/bagian/{id}',[BagianController::class,'destroy']);  
 
-
     Route::get('rekening',[RekeningController::class,'index'])->name('rekening.index');
 //  Route::get('/rekening',[\App\Http\Controllers\RekeningController::class,'index']);
     Route::post('/rekening',[RekeningController::class,'store']);
@@ -60,7 +64,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/sub_kegiatan/{id}',[Sub_kegiatanController::class,'update']);
     Route::delete('/sub_kegiatan/{id}',[Sub_kegiatanController::class,'destroy']); 
     Route::get('/search', [Sub_kegiatanController::class, 'index']);
-    Route::get('/sub_kegiatan/pilih_keg', [Sub_kegiatanController::class, 'pilihKeg']);
 
     Route::get('group_rekening',[Group_rekeningController::class,'index'])->name('group_rekening.index');
     Route::post('/group_rekening',[Group_rekeningController::class,'store']);
@@ -68,10 +71,34 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/group_rekening/{id}/edit/',[Group_rekeningController::class,'edit']);
     Route::put('/group_rekening/{id}',[Group_rekeningController::class,'update']);
     Route::delete('/group_rekening/{id}',[Group_rekeningController::class,'destroy']);
-    Route::get('daftar_rek',[Group_rekeningController::class,'daftarRek']);
+    //Route::get('show/{id}', [Group_rekeningController::class, 'show'])->name('group_rekening.show');
 
-    Route::get('pilih_Subkeg/{id}', [Group_rekeningController::class, 'pilihSubkeg']);
-    Route::get('show/{id}', [Group_rekeningController::class, 'show'])->name('group_rekening.show');
+    Route::get('program',[ProgramController::class,'index'])->name('program.index');
+    Route::post('/program',[ProgramController::class,'store']);
+    Route::get('/program/create',[ProgramController::class,'create']);
+    Route::get('/program/{id}/edit/',[ProgramController::class,'edit']);
+    Route::put('/program/{id}',[ProgramController::class,'update']);
+    Route::delete('/program/{id}',[ProgramController::class,'destroy']);     
+    
+    Route::get('penjabaran',[PenjabaranController::class,'index'])->name('penjabaran.index');
+    Route::post('/penjabaran',[PenjabaranController::class,'store']);
+    Route::get('/penjabaran/create',[PenjabaranController::class,'create']);
+    Route::get('/penjabaran/{id}/edit/',[PenjabaranController::class,'edit']);
+    Route::put('/penjabaran/{id}',[PenjabaranController::class,'update']);
+    Route::delete('/penjabaran/{id}',[PenjabaranController::class,'destroy']);     
+
+    Route::get('dpa',[DpaController::class,'index'])->name('dpa.index');
+    Route::post('/dpa',[DpaController::class,'store']);
+    Route::get('/dpa/create',[DpaController::class,'create']);
+    Route::get('/dpa/{id}/edit/',[DpaController::class,'edit']);
+    Route::put('/dpa/{id}',[DpaController::class,'update']);
+    Route::delete('/dpa/{id}',[DpaController::class,'destroy']);   
+
+    Route::get('/select2/pilih_keg', [Select2Controller::class, 'pilihKeg']);
+    Route::get('/select2/pilih_Subkeg/{id}', [Select2Controller::class, 'pilihSubkeg']);
+    Route::get('/select2/daftar_rek',[Select2Controller::class,'daftarRek']);
+    Route::get('/select2/pilih_bag', [Select2Controller::class, 'pilihBag']);
+    Route::get('/select2/pilih_rek', [Select2Controller::class, 'pilihRek']);
 
 });
 

@@ -124,23 +124,6 @@ class Group_rekeningController extends Controller
         $group_rekening->delete();
         return redirect('/group_rekening')->with('success','Data berhasil dihapus.');
     }
-    public function pilihSubkeg($id)
-    {
-                          $data = Sub_kegiatan::where('kegiatan_id', $id)->where(function($query) {
-                            $query->where('kode_sub_kegiatan', 'LIKE', '%'.request('q').'%')
-                                ->orWhere('nama_sub_kegiatan', 'LIKE', '%'.request('q').'%');
-                        })->paginate(15);
-    return response()->json($data);
-    }
-
-    public function daftarRek()
-    {
-    	$data = [];
-         $data = Rekening::where('no_rekening', 'LIKE', '%'.request('q').'%')
-                          ->orWhere('nama_rekening', 'LIKE', '%'.request('q').'%')
-                          ->get();
-        return response()->json($data);
-    }
 
     public function show($id)
     {

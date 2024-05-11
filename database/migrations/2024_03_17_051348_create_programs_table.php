@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_pencairans', function (Blueprint $table) {
+        Schema::create('programs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('penncairan_id');
-            $table->bigInteger('rekening_id');
-            $table->decimal('nominal');
+            $table->string('nama_program');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_pencairans');
+        Schema::dropIfExists('programs');
     }
 };

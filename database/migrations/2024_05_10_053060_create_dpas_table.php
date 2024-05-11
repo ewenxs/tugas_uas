@@ -11,11 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pencairans', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('bagians_id');
+        Schema::create('dpas', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('bagian_id');
             $table->bigInteger('kegiatan_id');
             $table->bigInteger('sub_kegiatan_id');
+            $table->bigInteger('rekening_id');
+            $table->bigInteger('program_id');
+            $table->string('nama_barang');
+            $table->bigInteger('volume');
+            $table->string('satuan');
+            $table->bigInteger('harga');
             $table->timestamps();
         });
     }
@@ -25,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pencairans');
+        Schema::dropIfExists('dpas');
     }
 };

@@ -198,6 +198,48 @@
                 </li>
               </ul>
             </li>
+            <li class="menu-item {{ request()->is('program') ? 'active open' : '' }}">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">Program</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('program') ? 'active' : '' }}">
+                  <a href="/program" class="menu-link">
+                    <div data-i18n="Without menu">Data Program</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item {{ request()->is('penjabaran') ? 'active open' : '' }}">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">Penjabaran</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('penjabaran') ? 'active' : '' }}">
+                  <a href="/penjabaran" class="menu-link">
+                    <div data-i18n="Without menu">Data Penjabaran</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item {{ request()->is('dpa') ? 'active open' : '' }}">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">DPA</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('dpa') ? 'active' : '' }}">
+                  <a href="/dpa" class="menu-link">
+                    <div data-i18n="Without menu">Data DPA</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
 
 
           </ul>
@@ -227,18 +269,6 @@
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Place this tag where you want the button to render. -->
-                <li class="nav-item lh-1 me-3">
-                  <a
-                    class="github-button"
-                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                    data-icon="octicon-star"
-                    data-size="large"
-                    data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >Star</a
-                  >
-                </li>
 
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -269,13 +299,7 @@
                     <li>
                       <a class="dropdown-item" href="#">
                         <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">My Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
+                        <span class="align-middle">Profil Saya</span>
                       </a>
                     </li>
                     <li>
@@ -389,13 +413,37 @@
 
   </body>
   <script type="text/javascript">
+  
+    $('.livesearch_pilih_rekening').select2({
+        theme: "bootstrap-5",
+        allowClear: true,
+        width: '100%',
+        placeholder: 'Pilih rekening',
+        ajax: {
+            url: '/select2/pilih_rek',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.no_rekening+' | '+item.nama_rekening,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
     $('.livesearch_kegiatan').select2({
         theme: "bootstrap-5",
         allowClear: true,
         width: '100%',
         placeholder: 'Pilih nama kegiatan',
         ajax: {
-            url: '/sub_kegiatan/pilih_keg',
+            url: '/select2/pilih_keg',
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -421,7 +469,7 @@
                 width: '100%',
                 placeholder:'Pilih Sub Kegiatan',
                 ajax: {
-                  url: "{{url('pilih_Subkeg')}}/"+ id,
+                  url: '/select2/pilih_Subkeg/'+ id,
                     processResults: function({data}){
                         return {
                             results: $.map(data, function(item){
@@ -436,13 +484,13 @@
             });
    });
 
-        $(".livesearch_rekening").select2({
+        $(".livesearch_daftar_rekening").select2({
         theme: "bootstrap-5",
         allowClear: true,
         width: '100%',
         placeholder: 'Pilih nama rekening',
         ajax: {
-            url: "{{url('daftar_rek')}}",
+            url: "/select2/daftar_rek",
             processResults: function (data) {
                 return {
                     results: $.map(data, function (item) {
@@ -455,6 +503,31 @@
               }
             }
         });
+
+        $('.livesearch_bagian').select2({
+        theme: "bootstrap-5",
+        allowClear: true,
+        width: '100%',
+        placeholder: 'Pilih nama bagian',
+        ajax: {
+            url: '/select2/pilih_bag',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.nama_bagian,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+
 </script>
 
 
@@ -537,6 +610,35 @@
           }, 
             {data: 'kode_kegiatan', name: 'kode_kegiatan'},
             {data: 'nama_kegiatan', name: 'nama_kegiatan'},
+            {data: 'nama_bagian', name: 'nama_bagian'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+      
+  });
+</script>
+
+<script type="text/javascript">
+  $(function () {      
+
+    var table = $('#data_table_program').DataTable({
+        processing: true,
+        responsive: true,
+        orderable: true,
+        serverSide: true,
+        order: [[ 1, 'asc' ]],
+        ajax: "{{ route('program.index') }}",
+        columns: [
+          {  
+            "data": null,
+            "class": "align-top",
+            "orderable": false,
+            "searchable": false,
+            "render": function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }  
+          }, 
+            {data: 'nama_program', name: 'nama_program'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
@@ -605,5 +707,64 @@
       
   });
 </script>
+
+<script type="text/javascript">
+  $(function () {
+      
+    var table = $('#data_table_penjabaran').DataTable({
+        processing: true,
+        responsive: true,
+        orderable: true,
+        serverSide: true,
+        order: [[ 1, 'asc' ]],
+        ajax: "{{ route('penjabaran.index') }}",
+        columns: [
+          {  
+            "data": null,
+            "class": "align-top",
+            "orderable": false,
+            "searchable": false,
+            "render": function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }  
+          }, 
+            {data: 'nomor_dpa', name: 'nomor_dpa'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+      
+  });
+</script>
+
+<script type="text/javascript">
+  $(function () {
+      
+    var table = $('#data_table_dpa').DataTable({
+        processing: true,
+        responsive: true,
+        orderable: true,
+        serverSide: true,
+        order: [[ 1, 'asc' ]],
+        ajax: "{{ route('dpa.index') }}",
+        columns: [
+          {  
+            "data": null,
+            "class": "align-top",
+            "orderable": false,
+            "searchable": false,
+            "render": function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }  
+          }, 
+            {data: 'nomor_dpa', name: 'nomor_dpa'},
+            {data: 'nama_kegiatan', name: 'nomor_dpa'},
+            {data: 'nama_sub_kegiatan', name: 'nama_sub_kegiatan'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+      
+  });
+</script>
+
 </html>
  

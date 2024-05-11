@@ -104,12 +104,5 @@ class Sub_kegiatanController extends Controller
         return redirect('/sub_kegiatan')->with('success','Data berhasil dihapus.');
     }
 
-    public function pilihKeg(Request $request)
-    {
-    	$data = [];
-        $data = Kegiatan::where('kode_kegiatan', 'LIKE', '%'.request('q').'%')
-                          ->orWhere('nama_kegiatan', 'LIKE', '%'.request('q').'%')
-                          ->get();
-        return response()->json($data);
-    }   
+  
 }
