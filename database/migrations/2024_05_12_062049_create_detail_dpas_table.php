@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dpas', function (Blueprint $table) {
+        Schema::create('detail_dpas', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('dpa_id');
+            $table->string('nama_barang');
+            $table->bigInteger('volume');
+            $table->string('satuan');
+            $table->bigInteger('harga');
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dpas');
+        Schema::dropIfExists('detail_dpas');
     }
 };

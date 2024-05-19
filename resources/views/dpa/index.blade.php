@@ -13,8 +13,11 @@
           <tr>
             <th>No</th>
             <th>Nomor DPA</th>
+            <th>Bagian</th>
             <th>Kegiatan</th>
             <th>Sub Kegiatan</th>
+            <th>Rekening</th>
+            <th>Program</th>
             <th>Actions</th>
           </tr>
         </thead>

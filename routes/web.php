@@ -99,6 +99,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/select2/daftar_rek',[Select2Controller::class,'daftarRek']);
     Route::get('/select2/pilih_bag', [Select2Controller::class, 'pilihBag']);
     Route::get('/select2/pilih_rek', [Select2Controller::class, 'pilihRek']);
+    Route::get('/select2/pilih_prog', [Select2Controller::class, 'pilihProg']);
 
 });
 

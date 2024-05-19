@@ -527,7 +527,28 @@
         }
     });
 
-
+    $('.livesearch_program').select2({
+        theme: "bootstrap-5",
+        allowClear: true,
+        width: '100%',
+        placeholder: 'Pilih nama program',
+        ajax: {
+            url: '/select2/pilih_prog',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.nama_program,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
 </script>
 
 
@@ -757,13 +778,56 @@
             }  
           }, 
             {data: 'nomor_dpa', name: 'nomor_dpa'},
-            {data: 'nama_kegiatan', name: 'nomor_dpa'},
-            {data: 'nama_sub_kegiatan', name: 'nama_sub_kegiatan'},
+            {data: 'nama_bagian', name: 'nama_bagian'},
+            {data: 'kode_kegiatan', name: 'kode_kegiatan'},
+            {data: 'kode_sub_kegiatan', name: 'kode_sub_kegiatan'},
+            {data: 'no_rekening', name: 'no_rekening'},
+            {data: 'nama_program', name: 'nama_program'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
       
   });
+</script>
+
+<script>
+function BtnAdd()
+{
+    /*Add Button*/
+    var v = $("#TRow").clone().appendTo("#TBody") ;
+    $(v).find("input").val('');
+    $(v).removeClass("d-none");
+    $(v).find("th").first().html($('#TBody tr').length - 1);
+}
+
+function BtnDel(v)
+{
+    /*Delete Button*/
+       $(v).parent().parent().remove(); 
+       /*GetTotal();*/
+
+        $("#TBody").find("tr").each(
+        function(index)
+        {
+           $(this).find("th").first().html(index);
+        }
+
+       );
+}
+
+function Calc(v)
+{
+    /*Detail Calculation Each Row*/
+    var index = $(v).parent().parent().index();
+    
+    var qty = document.getElementsByName("volume[]")[index].value;
+    var rate = document.getElementsByName("harga[]")[index].value;
+
+    var amt = qty * rate;
+    document.getElementsByName("total_harga[]")[index].value = Math.round(amt);
+
+    /*GetTotal();*/
+}
 </script>
 
 </html>

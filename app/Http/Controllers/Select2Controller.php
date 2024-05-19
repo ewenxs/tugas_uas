@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bagian;
 use App\Models\Kegiatan;
+use App\Models\Program;
 use App\Models\Rekening;
 use App\Models\Sub_kegiatan;
 use Illuminate\Http\Request;
@@ -53,4 +54,12 @@ class Select2Controller extends Controller
                           ->get();
         return response()->json($data);
     }    
+
+    public function pilihProg(Request $request)
+    {
+    	$data = [];
+        $data = Program::where('nama_program', 'LIKE', '%'.request('q').'%')
+                          ->get();
+        return response()->json($data);
+    }     
 }

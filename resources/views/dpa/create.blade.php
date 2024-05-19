@@ -21,6 +21,7 @@
             <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Penjabaran</label>
                 <input name="nomor_dpa" type="text" class="form-control" id="basic-default-fullname" value="{{ $penjabaran->nomor_dpa }}" disabled>
+                <input name="penjabaran_id" type="hidden" class="form-control" id="basic-default-fullname" value="{{ $penjabaran->id }}">
             </div>            
             <div class="mb-3">
               <label for="exampleFormControlSelect1" class="form-label">Nama Bagian</label>
@@ -41,7 +42,41 @@
               <label for="exampleFormControlSelect1" class="form-label">Nama Rekening</label>
               <select name ="rekening_id" class="livesearch_pilih_rekening form-select" id="rekening_dropdown" aria-label="Default select example">  
               </select>
-            </div> 
+            </div>  
+            <div class="mb-3">
+              <label for="exampleFormControlSelect1" class="form-label">Nama Program</label>
+              <select name ="program_id" class="livesearch_program form-select" id="program_dropdown" aria-label="Default select example">  
+              </select>
+            </div>
+            <hr class="my-4 mx-n4" /> 
+            <div class="mb-3">
+            <table class="table table-bordered">
+              <thead class="table-success">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Uraian</th>
+                  <th scope="col">Volume</th>
+                  <th scope="col">Satuan</th>
+                  <th scope="col">Harga</th>
+                  <th scope="col">Jumlah</th>
+                  <th scope="col">                         
+                      <button type="button" class="btn btn-sm btn-success" onclick="BtnAdd()">+</button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="TBody">
+                <tr id="TRow" class="d-none">
+                  <th scope="row">1</th>
+                  <td><textarea class="form-control" id="rincian_dpa" rows="2" name="nama_barang[]" placeholder="Masukkan uraian disini..."></textarea></td>
+                  <td><input type="text" class="form-control text-end" name="volume[]" onchange="Calc(this);"></td>
+                  <td><input type="text" class="form-control text-end" name="satuan[]"  onchange="Calc(this);"></td>
+                  <td><input type="number" class="form-control text-end" name="harga[]"  onchange="Calc(this);"></td>
+                  <td><input type="number" class="form-control text-end" name="total_harga[]" value="0" disabled=""></td>
+                  <td><button type="button" class="btn btn-sm btn-danger" onclick="BtnDel(this)">X</button></td>
+                </tr>
+              </tbody>
+            </table>  
+            </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
             <a href="{{ url()->previous() }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Kembali</a>
           </form>

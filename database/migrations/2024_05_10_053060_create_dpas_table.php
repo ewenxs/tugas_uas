@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('dpas', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('penjabaran_id');
             $table->bigInteger('bagian_id');
             $table->bigInteger('kegiatan_id');
             $table->bigInteger('sub_kegiatan_id');
             $table->bigInteger('rekening_id');
             $table->bigInteger('program_id');
-            $table->string('nama_barang');
-            $table->bigInteger('volume');
-            $table->string('satuan');
-            $table->bigInteger('harga');
             $table->timestamps();
         });
     }

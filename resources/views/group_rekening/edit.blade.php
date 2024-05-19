@@ -21,6 +21,14 @@
             @csrf
             <input type="hidden" name="id" value="{{ $group_rekening->id }}">
             <div class="mb-3">
+              <label for="exampleFormControlSelect1" class="form-label">Nama Bagian</label>
+              <select class="livesearch_bagian form-select  @error('bagians') is-invalid @enderror"  name="bagian_id">
+                @foreach($bagians as $bagian)
+                    <option value="{{$bagian->id}}" @if($group_rekening->bagian_id === $bagian->id) selected="selected" @endif>{{$bagian->nama_bagian}}</option>
+                @endforeach                
+              </select>
+            </div> 
+            <div class="mb-3">
               <label for="exampleFormControlSelect1" class="form-label">Nama kegiatan</label>
               <select class="livesearch_kegiatan form-select  @error('kegiatans') is-invalid @enderror"  name="kegiatan_id">
                 @foreach($kegiatans as $kegiatan)

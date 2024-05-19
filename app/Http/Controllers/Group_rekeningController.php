@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bagian;
 use App\Models\Group_rekening;
 use App\Models\Rekening;
 use App\Models\Sub_kegiatan;
@@ -64,12 +65,13 @@ class Group_rekeningController extends Controller
         $data = [];
         for ($x=0; $x < count($request->get('rekening_id')); $x++) {      
             $data[] = [
+                'bagian_id' => $request->get('bagian_id'),
                 'kegiatan_id' => $request->get('kegiatan_id'),
                 'sub_kegiatan_id' => $request->get('sub_kegiatan_id'),
                 'rekening_id' => $request->get('rekening_id')[$x],
             ];
         }   
-        group_rekening::upsert($data, ['kegiatan_id', 'sub_kegiatan_id', 'rekening_id']);
+        group_rekening::upsert($data, ['bagian_id', 'kegiatan_id', 'sub_kegiatan_id', 'rekening_id']);
         return redirect('/group_rekening')->with('success','Data berhasil ditambahkan.');
     }
 
@@ -91,8 +93,17 @@ class Group_rekeningController extends Controller
                               ->select('kegiatans.kode_kegiatan','kegiatans.nama_kegiatan','sub_kegiatans.kode_sub_kegiatan','sub_kegiatans.nama_sub_kegiatan', 'group_rekenings.id as rek_id')
                               ->get();
         $list_rekening = Rekening::whereIn('id', Group_rekening::select(['rekening_id'])->where([['kegiatan_id','=',$group_rekening->kegiatan_id],['sub_kegiatan_id','=', $group_rekening->sub_kegiatan_id]]))
-                             ->get();                   
-        return view('group_rekening.edit',compact(['group_rekening', 'group_rekenings','kegiatans','sub_kegiatan', 'list_rekening','sub_kegiatan_news']));
+                             ->get();   
+        $bagians = Bagian::where('id','=', $group_rekening->bagian_id)
+                           ->get();                              
+        return view('group_rekening.edit',compact([
+            'group_rekening', 
+            'group_rekenings',
+            'kegiatans',
+            'sub_kegiatan', 
+            'list_rekening',
+            'sub_kegiatan_news',
+            'bagians']));
     }
 
     public function update(Request $request, $id)
@@ -110,12 +121,13 @@ class Group_rekeningController extends Controller
         $data = [];
         for ($x=0; $x < count($request->get('rekening_id')); $x++) {      
             $data[] = [
+                'bagian_id' => $request->get('bagian_id'),
                 'kegiatan_id' => $request->get('kegiatan_id'),
                 'sub_kegiatan_id' => $request->get('sub_kegiatan_id'),
                 'rekening_id' => $request->get('rekening_id')[$x],
             ];
         }   
-        group_rekening::upsert($data, ['kegiatan_id', 'sub_kegiatan_id', 'rekening_id']);
+        group_rekening::upsert($data, ['bagian_id', 'kegiatan_id', 'sub_kegiatan_id', 'rekening_id']);
         return redirect('/group_rekening')->with('success','Data berhasil diubah.');
     }
 

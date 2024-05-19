@@ -31,7 +31,7 @@
               <label for="exampleFormControlSelect1" class="form-label">Nama kegiatan</label>
               <select class="livesearch_kegiatan form-select  @error('kegiatans') is-invalid @enderror"  name="kegiatan_id">
                 @foreach($kegiatans as $kegiatan)
-                    <option value="{{$kegiatan->kegiatan_id}}" @if($kegiatan->kegiatan_id === $sub_kegiatan->kegiatan_id) selected="selected" @endif>{{$kegiatan->nama_kegiatan}}</option>
+                    <option value="{{$kegiatan->kegiatan_id}}" @if($kegiatan->kegiatan_id === $sub_kegiatan->kegiatan_id) selected="selected" @endif>{{$kegiatan->kode_kegiatan}} | {{$kegiatan->nama_kegiatan}}</option>
                 @endforeach                
               </select>
             </div>
