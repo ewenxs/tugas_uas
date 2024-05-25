@@ -68,7 +68,7 @@
                 <tr id="TRow" class="d-none">
                   <th scope="row">1</th>
                   <td><textarea class="form-control" id="rincian_dpa" rows="2" name="nama_barang[]" placeholder="Masukkan uraian disini..."></textarea></td>
-                  <td><input type="text" class="form-control text-end" name="volume[]" onchange="Calc(this);"></td>
+                  <td><input type="text" class="form-control text-end" name="volume[]" onchange="Calc(this);" autocomplete="off"></td>
                   <td><input type="text" class="form-control text-end" name="satuan[]"  onchange="Calc(this);"></td>
                   <td><input type="number" class="form-control text-end" name="harga[]"  onchange="Calc(this);"></td>
                   <td><input type="number" class="form-control text-end" name="total_harga[]" value="0" disabled=""></td>

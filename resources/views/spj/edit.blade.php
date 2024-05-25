@@ -95,7 +95,7 @@
               <tr id="TRow">
                 <th scope="row">1</th>
                 <td><textarea class="form-control" id="rincian_dpa" rows="2" name="nama_barang[]" >{{ $detail_dpa->nama_barang }}</textarea></td>
-                <td><input type="text" class="form-control text-end" autocomplete="off" name="volume[]" onchange="Calc(this);" value="{{$detail_dpa->volume}}"></td>
+                <td><input type="text" class="form-control text-end" name="volume[]" onchange="Calc(this);" value="{{$detail_dpa->volume}}"></td>
                 <td><input type="text" class="form-control text-end" name="satuan[]"  onchange="Calc(this);" value="{{$detail_dpa->satuan}}"></td>
                 <td><input type="number" class="form-control text-end" name="harga[]"  onchange="Calc(this);" value="{{$detail_dpa->harga}}"></td>
                 <td><input type="number" class="form-control text-end" name="total_harga[]" value="{{round($hasilkali = $detail_dpa->volume * $detail_dpa->harga)}}" disabled=""></td>

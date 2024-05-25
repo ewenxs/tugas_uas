@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_dpas', function (Blueprint $table) {
+        Schema::create('detail_spjs', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('dpa_id');
+            $table->bigInteger('detail_dpa_id');
+            $table->bigInteger('spj_id');
+            $table->bigInteger('rekening_id');
+            $table->bigInteger('program_id');
+            $table->bigInteger('satuan');
+            $table->bigInteger('harga');
             $table->timestamps();
         });
     }
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_dpas');
+        Schema::dropIfExists('detail_spjs');
     }
 };

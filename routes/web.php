@@ -9,6 +9,7 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\Select2Controller;
+use App\Http\Controllers\SpjController;
 use App\Http\Controllers\Sub_kegiatanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -92,7 +93,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dpa/create',[DpaController::class,'create']);
     Route::get('/dpa/{id}/edit/',[DpaController::class,'edit']);
     Route::put('/dpa/{id}',[DpaController::class,'update']);
-    Route::delete('/dpa/{id}',[DpaController::class,'destroy']);   
+    Route::delete('/dpa/{id}',[DpaController::class,'destroy']);      
+
+    Route::get('spj',[SpjController::class,'index'])->name('spj.index');
+    Route::post('/spj',[SpjController::class,'store']);
+    Route::get('/spj/create',[SpjController::class,'create']);
+    Route::get('/spj/{id}/edit/',[SpjController::class,'edit']);
+    Route::put('/spj/{id}',[SpjController::class,'update']);
+    Route::delete('/spj/{id}',[SpjController::class,'destroy']); 
 
     Route::get('/select2/pilih_keg', [Select2Controller::class, 'pilihKeg']);
     Route::get('/select2/pilih_Subkeg/{id}', [Select2Controller::class, 'pilihSubkeg']);
@@ -100,6 +108,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/select2/pilih_bag', [Select2Controller::class, 'pilihBag']);
     Route::get('/select2/pilih_rek', [Select2Controller::class, 'pilihRek']);
     Route::get('/select2/pilih_prog', [Select2Controller::class, 'pilihProg']);
+
+    Route::get('/select2/pilih_bag_spj', [Select2Controller::class, 'pilihBagSpj']);
+    Route::get('/select2/pilih_keg_spj/{id}', [Select2Controller::class, 'pilihKegSpj']);
+    Route::get('/select2/pilih_SubkegSpj/{id}', [Select2Controller::class, 'pilihSubkegSpj']);
+    Route::get('/select2/tampil_list_rek', [Select2Controller::class, 'tampilListRek']);
 
 });
 
