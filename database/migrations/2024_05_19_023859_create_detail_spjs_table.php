@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('program_id');
             $table->bigInteger('satuan');
             $table->bigInteger('harga');
+            $table->tinyText('catatan');
             $table->timestamps();
         });
     }

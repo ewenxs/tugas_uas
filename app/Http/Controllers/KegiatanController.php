@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kegiatan;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -96,4 +97,5 @@ class KegiatanController extends Controller
         $kegiatan->delete();
         return redirect('/kegiatan')->with('success','Data berhasil dihapus.');
     }
+ 
 }

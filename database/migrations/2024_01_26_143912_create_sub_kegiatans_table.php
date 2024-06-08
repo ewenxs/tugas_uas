@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('kode_sub_kegiatan');
             $table->string('nama_sub_kegiatan');
+            $table->tinyText('sumber_dana');
             $table->bigInteger('kegiatan_id');
             $table->timestamps();
         });

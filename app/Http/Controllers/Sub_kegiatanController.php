@@ -60,12 +60,14 @@ class Sub_kegiatanController extends Controller
         $request->validate([
             'kegiatan_id' => 'required',
             'kode_sub_kegiatan' => 'required|min:5',
-            'nama_sub_kegiatan' => 'required|min:5'
+            'nama_sub_kegiatan' => 'required|min:5',
+            'sumber_dana' => 'required|min:5'
         ]);
 
         Sub_kegiatan::create([
             'kode_sub_kegiatan'=>$request->kode_sub_kegiatan,
             'nama_sub_kegiatan'=>$request->nama_sub_kegiatan,
+            'sumber_dana'=>$request->sumber_dana,
             'kegiatan_id'=>$request->kegiatan_id
         ]);
 
@@ -85,12 +87,14 @@ class Sub_kegiatanController extends Controller
         $request->validate([
             'kegiatan_id' => 'required',
             'kode_sub_kegiatan' => 'required|min:5',
-            'nama_sub_kegiatan' => 'required|min:5'
+            'nama_sub_kegiatan' => 'required|min:5',
+            'sumber_dana' => 'required|min:5'
         ]);
         $sub_kegiatan = sub_kegiatan::find($id);
         $sub_kegiatan->update([
             'kode_sub_kegiatan'=>$request->kode_sub_kegiatan,
             'nama_sub_kegiatan'=>$request->nama_sub_kegiatan,
+            'sumber_dana'=>$request->sumber_dana,
             'kegiatan_id'=>$request->kegiatan_id,
         ]);
 

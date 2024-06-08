@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header pb-0">
-    <h5>Tambah SPJ</h5>
+    <h5>TAMBAH SPJ</h5>
   </div>
   <div class="table-responsive text-nowrap">
     <div class="card-body">
@@ -22,7 +22,7 @@
           @csrf
           <div class="row">
 
-            <div class="col-md">
+            <div class="col-md-6">
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal SPJ</label>
                 <input type="text" class="datepickerTglSpj form-control" name="tanggal_spj" id="basic-default-fullname "
@@ -58,7 +58,7 @@
                   autocomplete="off" />
               </div>
             </div>
-            <div class="col-md">
+            <div class="col-md-6">
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal BAST</label>
                 <input type="text" class="datepickerTglBast form-control" name="tgl_bast" id="basic-default-fullname "
@@ -82,7 +82,7 @@
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlSelect1" class="form-label">Nama Sub kegiatan</label>
-                <select name="sub_kegiatan_id" class="livesearch_sub_kegiatan_spj form-select"
+                <select name="sub_kegiatan_id" class="livesearch_sub_kegiatan_spj sub_keg_spj_create form-select"
                   id="sub_kegiatan_spj_dropdown" aria-label="Default select example">
                 </select>
               </div>
@@ -94,28 +94,42 @@
             </div>
             <hr class="my-4 mx-n4" />
             <div class="mb-3">
-              <div class="table-responsive">
-                <input type="text" class="form-control" id="myInput" placeholder="Filter... ">
-                <div onclick="topFunction()" id="myBtn" class="totalSpj" title="Go to top">
-                </div>
-                <hr class="my-4 mx-n4" />
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col" class="text-wrap">Rekening|Program</th>
-                      <th scope="col">Spesifikasi</th>
-                      <th scope="col">Volume</th>
-                      <th scope="col">Nilai Satuan</th>
-                      <th scope="col">Nilai Harga</th>
-                      <th scope="col">Jumlah</th>
-                      <th scope="col">Sisa Anggaran</th>
-                    </tr>
-                  </thead>
-                  <tbody id="spj">
 
-                  </tbody>
-                </table>
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary me-1 float-right" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  <i class='bx bx-collapse-vertical bx-tada'></i> &nbsp;&nbsp;Daftar Kode Rekening
+                </button>
+              </div><br>
+              <div class="collapse" id="collapseExample">
+                <div class="d-flex p-3 border">
+                  <div class="table-responsive">
+                    <input type="text" class="form-control" id="myInput" placeholder="Filter... ">
+                    <div onclick="topFunction()" id="myBtn" class="totalSpj" title="Go to top">
+                    </div>
+                    <hr class="my-4 mx-n4" />
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-wrap">Detail</th>
+                          <th scope="col">Spesifikasi</th>
+                          <th scope="col">Catatan</th>
+                          <th scope="col">Qty</th>
+                          <th scope="col">Harga</th>
+                          <th scope="col">Jumlah</th>
+                          <th scope="col">Sisa Anggaran</th>
+                        </tr>
+                      </thead>
+                      <tbody id="spj" class="spj">
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
+
+
+
             </div>
             <div class="mb-3">
               <button type="submit" class="btn btn-primary">Simpan</button>

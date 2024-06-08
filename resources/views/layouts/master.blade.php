@@ -129,7 +129,7 @@
           <!-- Layouts -->
           <li class="menu-item {{ request()->is('bagian') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
+              <i class='menu-icon tf-icons bx bxs-building-house'></i>
               <div data-i18n="Layouts">Seksi/Subbag</div>
             </a>
 
@@ -144,7 +144,7 @@
 
           <li class="menu-item {{ request()->is('rekening') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
+              <i class="menu-icon tf-icons bx bx-dollar"></i>
               <div data-i18n="Layouts">Rekening</div>
             </a>
 
@@ -162,12 +162,11 @@
             </ul>
           </li>
 
-          <li class="menu-item {{ request()->is('kegiatan') ? 'active open' : '' }}">
+          <li class="menu-item {{ request()->is('kegiatan') || request()->is('sub_kegiatan') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
+              <i class="menu-icon tf-icons bx bx-grid-alt"></i>
               <div data-i18n="Layouts">Kegiatan</div>
             </a>
-
             <ul class="menu-sub">
               <li class="menu-item {{ request()->is('kegiatan') ? 'active' : '' }}">
                 <a href="/kegiatan" class="menu-link">
@@ -175,14 +174,6 @@
                 </a>
               </li>
             </ul>
-          </li>
-
-          <li class="menu-item {{ request()->is('sub_kegiatan') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Layouts">Sub Kegiatan</div>
-            </a>
-
             <ul class="menu-sub">
               <li class="menu-item {{ request()->is('sub_kegiatan') ? 'active' : '' }}">
                 <a href="/sub_kegiatan" class="menu-link">
@@ -191,9 +182,10 @@
               </li>
             </ul>
           </li>
+
           <li class="menu-item {{ request()->is('program') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
+              <i class="menu-icon tf-icons bx bxs-cube"></i>
               <div data-i18n="Layouts">Program</div>
             </a>
 
@@ -205,12 +197,12 @@
               </li>
             </ul>
           </li>
-          <li class="menu-item {{ request()->is('penjabaran') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Layouts">Penjabaran</div>
-            </a>
 
+          <li class="menu-item {{ request()->is('penjabaran') || request()->is('dpa') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bxs-spreadsheet"></i>
+              <div data-i18n="Layouts">DPA</div>
+            </a>
             <ul class="menu-sub">
               <li class="menu-item {{ request()->is('penjabaran') ? 'active' : '' }}">
                 <a href="/penjabaran" class="menu-link">
@@ -218,12 +210,6 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="menu-item {{ request()->is('dpa') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Layouts">DPA</div>
-            </a>
             <ul class="menu-sub">
               <li class="menu-item {{ request()->is('dpa') ? 'active' : '' }}">
                 <a href="/dpa" class="menu-link">
@@ -234,13 +220,34 @@
           </li>
           <li class="menu-item {{ request()->is('spj') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
+              <i class="menu-icon tf-icons bx bxs-folder-open"></i>
               <div data-i18n="Layouts">SPJ</div>
             </a>
             <ul class="menu-sub">
               <li class="menu-item {{ request()->is('spj') ? 'active' : '' }}">
                 <a href="/spj" class="menu-link">
                   <div data-i18n="Without menu">Data SPJ</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li
+            class="menu-item {{ request()->is('laporan/cetak_dpa') || request()->is('laporan/cetak_lra') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bxs-printer"></i>
+              <div data-i18n="Layouts">Laporan</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('laporan/cetak_dpa') ? 'active' : '' }}">
+                <a href="/laporan/cetak_dpa" class="menu-link">
+                  <div data-i18n="Without menu">Cetak DPA</div>
+                </a>
+              </li>
+            </ul>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('laporan/cetak_lra') ? 'active' : '' }}">
+                <a href="/laporan/cetak_spj" class="menu-link">
+                  <div data-i18n="Without menu">Cetak LRA</div>
                 </a>
               </li>
             </ul>
@@ -334,12 +341,23 @@
           <!-- Content -->
           <div class="container-xxl flex-grow-1 container-p-y">
             @if(session()->has('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
+            <div class="alert alert-primary d-flex" role="alert">
+              <span class="badge badge-center rounded-pill bg-primary border-label-primary p-3 me-2"><i
+                  class='bx bx-like bx-flashing'></i></span>
+              <div class="d-flex flex-column ps-1">
+                <h6 class="alert-heading d-flex align-items-center fw-bold mb-1">Notifikasi </h6>
+                <span>{{ session('success') }}</span>
+              </div>
+            </div>
             @endif
             @yield('content')
           </div>
         </div>
         <!-- / Content -->
+
+
+        @yield('dash')
+
 
         <!-- Footer -->
         <footer class="content-footer footer bg-footer-theme">
@@ -799,7 +817,28 @@
         }
     });
 
-  
+    $('.livesearch_penjabaran').select2({
+        theme: "bootstrap-5",
+        allowClear: true,
+        width: '100%',
+        placeholder: 'Pilih penjabaran',
+        ajax: {
+            url: '/select2/pilih_penjabaran',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.nomor_dpa,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
 </script>
 <!-- End Select2. -->
 
@@ -895,12 +934,11 @@ $(document).ready(function(){
       })
   }
 
-      $(".livesearch_sub_kegiatan_spj").change(function(){
-          var query = $('.livesearch_sub_kegiatan_spj').val();
+      $(".sub_keg_spj_create").change(function(){
+          var query = $('.sub_keg_spj_create').val();
           fetch_customer_data(query);
       });
-      
-      
+
       $('#satuan').keyup(calculate);
       $('#harga').keyup(calculate);
           
@@ -980,8 +1018,9 @@ function Calculated(v)
     var sum=0;
     $(".jumlahspj").each(function(){
         if($(this).val() !== "")
-          sum += parseInt($(this).val(), 10);   
+          sum += parseInt($(this).val());   
     });
+
     sum = sum.toLocaleString("id-ID");
     $('#myBtn').text('Jumlah: Rp.'+sum);
 
@@ -992,7 +1031,7 @@ function Calculated(v)
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-    $("#spj tr").filter(function() {
+    $(".spj tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });

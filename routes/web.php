@@ -6,6 +6,7 @@ use App\Http\Controllers\DpaController;
 use App\Http\Controllers\PenjabaranController;
 use App\Http\Controllers\Group_rekeningController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\Select2Controller;
@@ -56,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kegiatan/{id}/edit/',[KegiatanController::class,'edit']);
     Route::put('/kegiatan/{id}',[KegiatanController::class,'update']);
     Route::delete('/kegiatan/{id}',[KegiatanController::class,'destroy']); 
+    Route::get('/kegiatan/cetak-pdf',[KegiatanController::class,'cetak_pdf']); 
     
     Route::get('sub_kegiatan',[Sub_kegiatanController::class,'index'])->name('sub_kegiatan.index');
 //  Route::get('/sub_kegiatan',[\App\Http\Controllers\Sub_kegiatanController::class,'index']);
@@ -108,11 +110,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/select2/pilih_bag', [Select2Controller::class, 'pilihBag']);
     Route::get('/select2/pilih_rek', [Select2Controller::class, 'pilihRek']);
     Route::get('/select2/pilih_prog', [Select2Controller::class, 'pilihProg']);
+    Route::get('/select2/pilih_penjabaran', [Select2Controller::class, 'pilihPenjabaran']);
 
     Route::get('/select2/pilih_bag_spj', [Select2Controller::class, 'pilihBagSpj']);
     Route::get('/select2/pilih_keg_spj/{id}', [Select2Controller::class, 'pilihKegSpj']);
     Route::get('/select2/pilih_SubkegSpj/{id}', [Select2Controller::class, 'pilihSubkegSpj']);
     Route::get('/select2/tampil_list_rek', [Select2Controller::class, 'tampilListRek']);
+    //Route::get('/select2/tampil_list_rek_edit', [Select2Controller::class, 'tampilListRekEdit']);
+
+    Route::get('/laporan/cetak_dpa',[LaporanController::class,'laporanDpa']);
+    Route::get('/laporan/cetak_spj',[LaporanController::class,'laporanSpj']);
+    Route::post('/laporan/cetak_pdf_dpa',[LaporanController::class,'laporanPdfDpa']);
+    Route::post('/laporan/cetak_pdf_spj',[LaporanController::class,'laporanPdfSpj']);
 
 });
 

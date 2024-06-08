@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bagian;
 use App\Models\Dpa;
 use App\Models\Kegiatan;
+use App\Models\Penjabaran;
 use App\Models\Program;
 use App\Models\Rekening;
 use App\Models\Sub_kegiatan;
@@ -113,6 +114,7 @@ class Select2Controller extends Controller
                              'detail_dpas.harga as harga',
                              'detail_dpas.dpa_id as dpa_id',
                              'detail_dpas.id as detail_dpa_id')
+                    ->orderBy('rekenings.no_rekening')
                     ->get();
             } else {
                 $data = DB::table('dpas')
@@ -129,6 +131,7 @@ class Select2Controller extends Controller
                          'detail_dpas.harga as harga',
                          'detail_dpas.dpa_id as dpa_id',
                          'detail_dpas.id as detail_dpa_id')
+                         ->orderBy('rekenings.no_rekening')
                 ->get();
             }
              
@@ -137,6 +140,7 @@ class Select2Controller extends Controller
                 foreach($data as $row)
                 {
                     $SisaAnggaran = $row->harga * $row->volume;
+                    
                     $output .= '
                     <tr>
                     <td style="width: 5%">
@@ -144,24 +148,24 @@ class Select2Controller extends Controller
                     <input type="hidden" name="detail_dpa_id[]" id="detail_dpa_id" value="'.$row->detail_dpa_id.'"/>  
                     <input type="hidden" name="rekening_id[]" id="rekening_id" value="'.$row->rekening_id.'"/>
                     <input type="hidden" name="program_id[]" id="program_id" value="'.$row->program_id.'"/>                    
-                    <p><small class="text-muted text-wrap">'.$row->no_rekening.'</p>
-                    <p><small class="text-muted text-wrap">'.$row->nama_program.'</p>
+                    <p><small class="text-muted text-wrap">Kode Rekening : '.$row->no_rekening.' '.$row->nama_program.'</small></p>
+                    <p><small class="text-muted text-wrap">Harga Satuan : Rp.&nbsp; '.number_format($row->harga, 0).'</small></p>
+                    <p><small class="text-muted text-wrap">Qty : '.number_format($row->volume,2,",",".").'</small></p>
                     </td>
                     <td style="width: 5%">
-                    <p><small class="text-muted text-wrap">'.$row->nama_barang.'</p>
+                    <p><small class="text-muted text-wrap">'.$row->nama_barang.'</small></p>
                     </td>
-                    <td style="width: 5%">
-                    <p><small class="text-muted text-wrap">Rp.&nbsp;'.number_format($row->harga, 0).'&nbsp;/&nbsp;'.$row->satuan.'</p>
-                    <p><small class="text-muted text-wrap">'.$row->volume.'&nbsp;'.$row->satuan.'</p>
+                    <td style="width: 30%">
+                    <textarea class="form-control catatan" id="catatan" rows="2" name="catatan[]" placeholder="Catatan (optional)"></textarea>
                     </td>
-                    <td style="width: 5%">
+                    <td style="width: 10%">
                     <input type="text" name="satuanspj[]" class="form-control satuanspj" onchange="Calculated(this);" id="satuanspj" value="0" />
                     </td>
-                    <td style="width: 15%">
+                    <td style="width: 25%">
                     <input type="text" name="hargaspj[]" class="money form-control hargaspj" onchange="Calculated(this);" value="0" id="hargaspj"/>
                     </td>
-                    <td style="width: 15%">
-                    <input type="text" name="jumlahspj[]" class="form-control jumlahspj" id="jumlahspj" onchange="Calculated(this);" placeholder="Jumlah" />
+                    <td style="width: 25%">
+                    <input type="text" name="jumlahspj[]" class="form-control jumlahspj" id="jumlahspj" value="0" onchange="Calculated(this);" placeholder="Jumlah" />
                     </td>
                     <td style="width: 10%">
                     <input type="hidden" name="sisa_anggaran_hidden[]" class="form-control" onchange="Calculated(this);" value="'.round($SisaAnggaran).'" id="sisa_anggaran"/>
@@ -184,4 +188,12 @@ class Select2Controller extends Controller
         }
 
     }   
+   
+    public function pilihPenjabaran(Request $request)
+    {
+    	$data = [];
+        $data = Penjabaran::where('nomor_dpa', 'LIKE', '%'.request('q').'%')
+                          ->get();
+        return response()->json($data);
+    }  
 }
