@@ -61,10 +61,26 @@
     </style>
     @php
     $tahunNow = date('Y');
+
+    $from2 = strtotime($from);
+    $to2 = strtotime($to);
+
+    $fromNew = date("d-m-Y", $from2);
+    $toNew = date("d-m-Y", $to2);
+
+    if ($pencairan == 'no') {
+    $header_lap = "SPJ YANG BELUM DICAIRKAN";
+    }elseif ($pencairan == 'yes') {
+    $header_lap = "SPJ YANG TELAH DICAIRKAN";
+    }else {
+    $header_lap = "SEMUA SPJ YANG MASUK";
+    }
     @endphp
 
     <center>
-        <h6>DOKUMEN PELAKSANAAN ANGGARAN</h6>
+        <h6>LAPORAN REALISASI ANGGARAN</h6>
+        <h6>{{$header_lap}}</h6>
+        <h6>TANGGAL {{$fromNew}} S/D TANGGAL {{$toNew}}</h6>
         <h6>TAHUN ANGGARAN {{$tahunNow}}</h6>
     </center>
     </br>
@@ -108,10 +124,12 @@
             </tr>
 
             @php
+
             $sumNominal += $dp->nominal;
             $sumPaguAnggaran += $dp->anggaran;
             $sumSisaAnggaran += $sisa_anggaran;
 
+            if ($pencairan == 'no') {
             $td_spj = DB::table('spjs')
             ->join('detail_spjs', 'spjs.id', '=', 'detail_spjs.spj_id')
             ->join('rekenings', 'rekenings.id', '=', 'detail_spjs.rekening_id')
@@ -130,9 +148,66 @@
             ->where('detail_spjs.program_id','=', $dp->program_id)
             ->where('detail_spjs.detail_dpa_id','=', $dp->detail_dpa_id)
             ->where('detail_spjs.harga','>', 0)
+            ->whereNotIn('spjs.id', function($q){
+            $q->select('spj_id')->from('pencairans');
+            })
+            ->whereBetween('spjs.tanggal_spj', [$from, $to])
             ->orderBy('rekenings.no_rekening','ASC')
             ->orderBy('programs.nama_program','ASC')
             ->get();
+            }elseif ($pencairan == 'yes') {
+            $td_spj = DB::table('spjs')
+            ->join('detail_spjs', 'spjs.id', '=', 'detail_spjs.spj_id')
+            ->join('rekenings', 'rekenings.id', '=', 'detail_spjs.rekening_id')
+            ->join('programs', 'programs.id', '=', 'detail_spjs.program_id')
+            ->select('spjs.tanggal_spj as tanggal_spj',
+            'spjs.jenis_spj as jenis_spj',
+            'spjs.uraian as uraian',
+            'detail_spjs.satuan as satuan',
+            'detail_spjs.harga as harga',
+            'rekenings.no_rekening as no_rekening',
+            'programs.nama_program as nama_program',
+            'detail_spjs.rekening_id as rekening_id',
+            'detail_spjs.program_id as program_id',
+            )
+            ->where('detail_spjs.rekening_id','=', $dp->rekening_id)
+            ->where('detail_spjs.program_id','=', $dp->program_id)
+            ->where('detail_spjs.detail_dpa_id','=', $dp->detail_dpa_id)
+            ->where('detail_spjs.harga','>', 0)
+            ->whereIn('spjs.id', function($q){
+            $q->select('spj_id')->from('pencairans');
+            })
+            ->whereBetween('spjs.tanggal_spj', [$from, $to])
+            ->orderBy('rekenings.no_rekening','ASC')
+            ->orderBy('programs.nama_program','ASC')
+            ->get();
+            }else {
+            $td_spj = DB::table('spjs')
+            ->join('detail_spjs', 'spjs.id', '=', 'detail_spjs.spj_id')
+            ->join('rekenings', 'rekenings.id', '=', 'detail_spjs.rekening_id')
+            ->join('programs', 'programs.id', '=', 'detail_spjs.program_id')
+            ->select('spjs.tanggal_spj as tanggal_spj',
+            'spjs.jenis_spj as jenis_spj',
+            'spjs.uraian as uraian',
+            'detail_spjs.satuan as satuan',
+            'detail_spjs.harga as harga',
+            'rekenings.no_rekening as no_rekening',
+            'programs.nama_program as nama_program',
+            'detail_spjs.rekening_id as rekening_id',
+            'detail_spjs.program_id as program_id',
+            )
+            ->where('detail_spjs.rekening_id','=', $dp->rekening_id)
+            ->where('detail_spjs.program_id','=', $dp->program_id)
+            ->where('detail_spjs.detail_dpa_id','=', $dp->detail_dpa_id)
+            ->where('detail_spjs.harga','>', 0)
+            ->whereBetween('spjs.tanggal_spj', [$from, $to])
+            ->orderBy('rekenings.no_rekening','ASC')
+            ->orderBy('programs.nama_program','ASC')
+            ->get();
+            }
+
+
+
             @endphp
             @foreach($td_spj as $dt)
             <tr class="spj_detail">

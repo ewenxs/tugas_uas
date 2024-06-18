@@ -26,8 +26,8 @@
             <div class="col-md-6">
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal SPJ</label>
-                <input type="text" class="datepickerTglSpj form-control" name="tanggal_spj" id="basic-default-fullname "
-                  autocomplete="off" value="{{ $spj->tanggal_spj }}" />
+                <input type="text" class="datepickerTglSpj form-control" readonly="" name="tanggal_spj"
+                  id="basic-default-fullname " autocomplete="off" value="{{ $spj->tanggal_spj }}" />
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlSelect1" class="form-label">Jenis SPJ</label>
@@ -40,7 +40,7 @@
               </div>
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal Kontrak/No Pesanan</label>
-                <input type="text" class="datepickerTglKontrak form-control" name="tgl_kontrak"
+                <input type="text" class="datepickerTglKontrak form-control" readonly="" name="tgl_kontrak"
                   id="basic-default-fullname " autocomplete="off" value="{{ $spj->tgl_kontrak }}" />
               </div>
               <div class="mb-3">
@@ -50,8 +50,8 @@
               </div>
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal BAPHP</label>
-                <input type="text" class="datepickerTglBaphp form-control" name="tgl_baphp" id="basic-default-fullname "
-                  autocomplete="off" value="{{ $spj->tgl_baphp }}" />
+                <input type="text" class="datepickerTglBaphp form-control" readonly="" name="tgl_baphp"
+                  id="basic-default-fullname " autocomplete="off" value="{{ $spj->tgl_baphp }}" />
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlSelect1" class="form-label">Nomor BAPHP</label>
@@ -62,8 +62,8 @@
             <div class="col-md-6">
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal BAST</label>
-                <input type="text" class="datepickerTglBast form-control" name="tgl_bast" id="basic-default-fullname "
-                  autocomplete="off" value="{{ $spj->tgl_bast }}" />
+                <input type="text" class="datepickerTglBast form-control" readonly="" name="tgl_bast"
+                  id="basic-default-fullname " autocomplete="off" value="{{ $spj->tgl_bast }}" />
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlSelect1" class="form-label">Nomor BAST</label>
@@ -162,7 +162,7 @@
                           </td>
                           <td style="width: 30%">
                             <textarea class="form-control catatan" id="catatan" rows="2" name="catatan[]"
-                              placeholder="Catatan (optional)">{{ $table_spj->detail_spj_id }} | {{ $table_spj->catatan }}</textarea>
+                              placeholder="Catatan (optional)">{{ $table_spj->catatan }}</textarea>
                           </td>
                           <td style="width: 10%">
                             <input type="text" name="satuanspj[]" class="form-control satuanspj"

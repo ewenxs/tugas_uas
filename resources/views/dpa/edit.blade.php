@@ -86,7 +86,7 @@
                 <th scope="col">Harga</th>
                 <th scope="col">Jumlah</th>
                 <th scope="col">
-                  <button type="button" class="btn btn-sm btn-success" onclick="BtnAdd()">+</button>
+                  <button type="button" class="btn btn-sm btn-primary" onclick="BtnAdd()">+</button>
                 </th>
               </tr>
             </thead>

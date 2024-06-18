@@ -34,19 +34,21 @@ class SpjController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                            $btn =  '<div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Action
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="spj/'.$row->spj_id.'/edit">Edit</a></li>
-                                            <form action="/spj/'.$row->spj_id.'" method="POST">
-                                            '.csrf_field().'
-                                            '.method_field("DELETE").'
-                                            <input type="submit" class="dropdown-item" onclick="return confirm(\'Apakah anda yakin ?\')" value="Delete">
-                                          </form></li>
-                                        </ul>
-                                    </div> ';
+                    $btn =  '<div class="btn-group" id="dropdown-icon-demo">
+                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                             <i class="bx bx-menu me-1"></i> Action </button>
+                             <ul class="dropdown-menu">
+                             <li><a class="dropdown-item" href="spj/'.$row->spj_id.'/view">Lihat</a></li>
+                             <li><hr class="dropdown-divider" /></li>
+                             <li><a class="dropdown-item" href="spj/'.$row->spj_id.'/edit">Edit</a></li>
+                             <li><hr class="dropdown-divider" /></li>
+                             <li><form action="/spj/'.$row->spj_id.'" method="POST">
+                                '.csrf_field().'
+                                '.method_field("DELETE").'
+                             <input type="submit" class="dropdown-item" onclick="return confirm(\'Apakah anda yakin ?\')" value="Delete">
+                             </form></li>
+                             </ul>
+                             </div>';
       
                             return $btn;
                     })
@@ -295,6 +297,60 @@ $table_spjs = DB::table('detail_spjs')
         return redirect('/spj')->with('success','Data berhasil dihapus.');
     } 
 
-    
+    public function view($id){
+        $spj = spj::find($id);
+        $bagians = Bagian::where('id','=', $spj->bagian_id)
+                           ->first();    
+        $kegiatans = Kegiatan::where('id','=',$spj->kegiatan_id) 
+                               ->first();     
+        $sub_kegiatans = Sub_kegiatan::where('id','=', $spj->sub_kegiatan_id)
+                                       ->first();      
+
+$table_spjs = DB::table('detail_spjs')
+        ->join('rekenings', 'rekenings.id', '=', 'detail_spjs.rekening_id')
+        ->join('programs', 'programs.id', '=', 'detail_spjs.program_id')
+        ->join('dpas', 'dpas.id', '=', 'detail_spjs.dpa_id')
+        ->join('detail_dpas', 'detail_dpas.id', '=', 'detail_spjs.detail_dpa_id')
+        ->join('spjs', 'spjs.id', '=', 'detail_spjs.spj_id')
+        ->select('rekenings.no_rekening as no_rekening',
+                 'rekenings.id as rekening_id',
+                 'rekenings.nama_rekening as nama_rekening',
+                 'programs.nama_program as nama_program',
+                 'programs.id as program_id',
+                 'detail_dpas.nama_barang as nama_barang',
+                 'detail_dpas.volume as volume',
+                 'detail_dpas.satuan as satuan',  
+                 'detail_dpas.harga as harga',
+                 'detail_dpas.dpa_id as dpa_id',
+                 'detail_dpas.id as detail_dpa_id',
+                 'detail_spjs.satuan as satuanSpj', 
+                 'detail_spjs.harga as hargaSpj',
+                 'detail_spjs.catatan as catatan',
+                 'detail_spjs.id as detail_spj_id',
+                 'detail_spjs.rekening_id as rek_id', 
+                 'detail_spjs.program_id as prog_id',
+                 'detail_dpas.id as detdpaid'
+           )
+           ->selectSub(
+               DB::table('detail_spjs')
+                   ->selectRaw('sum(satuan*harga)')
+                   ->whereColumn('detail_spjs.rekening_id', 'rek_id')
+                   ->whereColumn('detail_spjs.program_id', 'prog_id'),
+               'totalspj',
+           )
+           ->selectSub(
+               DB::table('detail_dpas')
+                   ->selectRaw('sum(volume*harga)')
+                   ->whereColumn('detail_dpas.id', 'detdpaid'),
+               'totaldpa',
+           )
+              ->where('spjs.id', '=', $id)  
+              ->where('detail_spjs.harga','>', 0)
+              ->get();
+                      
+        return view('spj.view',compact([
+            'spj', 'bagians', 'sub_kegiatans','kegiatans','table_spjs'
+        ]));
+    }    
     
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2024 at 05:05 PM
+-- Generation Time: Jun 18, 2024 at 06:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -1991,7 +1991,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (41, '2024_05_10_053060_create_dpas_table', 9),
 (42, '2024_05_12_062049_create_detail_dpas_table', 10),
 (43, '2024_05_19_022935_create_spjs_table', 11),
-(44, '2024_05_19_023859_create_detail_spjs_table', 12);
+(44, '2024_05_19_023859_create_detail_spjs_table', 12),
+(45, '2024_06_09_111043_create_pencairans_table', 13);
 
 -- --------------------------------------------------------
 
@@ -2016,6 +2017,30 @@ CREATE TABLE `password_reset_tokens` (
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pencairans`
+--
+
+CREATE TABLE `pencairans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `spj_id` bigint(20) NOT NULL,
+  `tgl_pencairan` date NOT NULL,
+  `no_spm` varchar(255) NOT NULL,
+  `no_sp2d` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pencairans`
+--
+
+INSERT INTO `pencairans` (`id`, `spj_id`, `tgl_pencairan`, `no_spm`, `no_sp2d`, `created_at`, `updated_at`) VALUES
+(1, 42, '2024-01-26', '35.74/03.0/000049/LS/7.01.2.13.0.00.02.0000/M/1/2024', '35.74/04.0/000030/LS/7.01.2.13.0.00.02.0000/M/1/2024', '2024-06-14 08:07:11', '2024-06-14 08:07:11'),
+(2, 52, '2024-02-07', '35.74/03.0/000090/LS/7.01.2.13.0.00.02.0000/M/2/2024', '35.74/04.0/000053/LS/7.01.2.13.0.00.02.0000/M/2/2024', '2024-06-14 08:08:20', '2024-06-14 08:08:20');
 
 -- --------------------------------------------------------
 
@@ -2417,9 +2442,11 @@ INSERT INTO `sub_kegiatans` (`id`, `kode_sub_kegiatan`, `nama_sub_kegiatan`, `su
 CREATE TABLE `users` (
   `id` bigint(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
+  `username` char(30) NOT NULL,
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `role` char(16) NOT NULL DEFAULT 'admin',
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -2429,10 +2456,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Choiril Anam', 'iriel.just4blog@gmail.com', NULL, '$2y$12$v4ogW0sKYkmxxePKyHpK2eJTY5LbrQwVvGGwfuTgFO32J1JzQShde', NULL, '2024-01-28 06:45:40', '2024-01-28 06:45:40'),
-(2, 'Ana Maryati Ningrum', 'ana.cendut@gmail.com', NULL, '$2y$12$a.FRn8ZEbcMbsQ8JbzD/Q.Tvg6k2trMJ3NyBZSWOLK/HKcGeV2bKy', NULL, '2024-02-02 07:25:08', '2024-02-02 07:25:08'),
-(3, 'Davina Davino', 'davina.davino@gmail.com', NULL, '$2y$12$13sW3VWf582ROjzSrFjHc.SIClttN8h/Zxm4koNTnCyFNdYCLD5ai', NULL, '2024-02-05 07:03:19', '2024-02-05 07:03:19');
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Choiril Anam', '000000000000000000', 'iriel.just4blog@gmail.com', NULL, '$2y$12$v4ogW0sKYkmxxePKyHpK2eJTY5LbrQwVvGGwfuTgFO32J1JzQShde', 'admin', NULL, '2024-01-28 06:45:40', '2024-01-28 06:45:40'),
+(4, 'GOFUR EFFENDY, S.T., M.Si', '197201022001121003', 'gofur.effendy@gmail.com', NULL, '$2y$12$x8raqSUMAU5SkrDB1iOg9O5/.pEc73C4VwxefEJnS0ltCllyCiHmO', 'supervisor', NULL, '2024-06-14 18:22:57', '2024-06-15 01:09:51'),
+(5, 'DWI HERMANTO, S.Sos., M.Si.', '197404291993021001', 'dwi.hermanto@gmail.com', NULL, '$2y$12$lVp6a7a0xswXMURd4pL99uIZa51SpRFNzJGb/1qSxmo9XGjEPRcEq', 'pptk', NULL, '2024-06-15 00:28:50', '2024-06-15 00:28:50'),
+(7, 'CHOIRIL ANAM, A.Md', '198612092020121002', 'riel.anamz@gmail.com', NULL, '$2y$12$UjOipAev4j4mbMI4ZcHGduoNHuXEtDvNTEI60E7WpCCQl82YAbKE6', 'bendahara', NULL, '2024-06-15 00:30:39', '2024-06-15 01:10:10');
 
 --
 -- Indexes for dumped tables
@@ -2498,6 +2526,12 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `pencairans`
+--
+ALTER TABLE `pencairans`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `penjabarans`
@@ -2594,7 +2628,13 @@ ALTER TABLE `kegiatans`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT for table `pencairans`
+--
+ALTER TABLE `pencairans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `penjabarans`
@@ -2636,7 +2676,7 @@ ALTER TABLE `sub_kegiatans`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

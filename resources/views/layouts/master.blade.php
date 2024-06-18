@@ -8,7 +8,7 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+  <title>Sistem Informasi Pelaporan Realisasi Anggaran Kecamatan Kademangan</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Favicon -->
@@ -46,6 +46,9 @@
 
 
 </head>
+@php
+$user = Auth::user();
+@endphp
 
 <body>
   <!-- Layout wrapper -->
@@ -111,6 +114,8 @@
         <div class="menu-inner-shadow"></div>
 
         <ul class="menu-inner py-1">
+          <?php $role = Auth::user()->role; ?>
+          @if($role == 'admin')
           <!-- Dashboards -->
           <li class="menu-item {{ request()->is('dashboard') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -125,7 +130,6 @@
               </li>
             </ul>
           </li>
-
           <!-- Layouts -->
           <li class="menu-item {{ request()->is('bagian') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -218,7 +222,7 @@
               </li>
             </ul>
           </li>
-          <li class="menu-item {{ request()->is('spj') ? 'active open' : '' }}">
+          <li class="menu-item {{ request()->is('spj') || request()->is('pencairan') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bxs-folder-open"></i>
               <div data-i18n="Layouts">SPJ</div>
@@ -227,6 +231,11 @@
               <li class="menu-item {{ request()->is('spj') ? 'active' : '' }}">
                 <a href="/spj" class="menu-link">
                   <div data-i18n="Without menu">Data SPJ</div>
+                </a>
+              </li>
+              <li class="menu-item {{ request()->is('pencairan') ? 'active' : '' }}">
+                <a href="/pencairan" class="menu-link">
+                  <div data-i18n="Without menu">Data SPJ Cair</div>
                 </a>
               </li>
             </ul>
@@ -252,6 +261,161 @@
               </li>
             </ul>
           </li>
+          <li class="menu-item {{ request()->is('user') ? 'active' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bxs-user-account"></i>
+              <div data-i18n="Layouts">User</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('user') ? 'active' : '' }}">
+                <a href="/user" class="menu-link">
+                  <div data-i18n="Without menu">Data User</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @elseif($role == 'bendahara')
+          <!-- Dashboards -->
+          <li class="menu-item {{ request()->is('dashboard') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div data-i18n="Dashboards">Dashboards</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }}">
+                <a href="/dashboard" class="menu-link">
+                  <div data-i18n="Analytics">Dashboard</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item {{ request()->is('spj') || request()->is('pencairan') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bxs-folder-open"></i>
+              <div data-i18n="Layouts">SPJ</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('spj') ? 'active' : '' }}">
+                <a href="/spj" class="menu-link">
+                  <div data-i18n="Without menu">Data SPJ</div>
+                </a>
+              </li>
+              <li class="menu-item {{ request()->is('pencairan') ? 'active' : '' }}">
+                <a href="/pencairan" class="menu-link">
+                  <div data-i18n="Without menu">Data SPJ Cair</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li
+            class="menu-item {{ request()->is('laporan/cetak_dpa') || request()->is('laporan/cetak_lra') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bxs-printer"></i>
+              <div data-i18n="Layouts">Laporan</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('laporan/cetak_dpa') ? 'active' : '' }}">
+                <a href="/laporan/cetak_dpa" class="menu-link">
+                  <div data-i18n="Without menu">Cetak DPA</div>
+                </a>
+              </li>
+            </ul>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('laporan/cetak_lra') ? 'active' : '' }}">
+                <a href="/laporan/cetak_spj" class="menu-link">
+                  <div data-i18n="Without menu">Cetak LRA</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @elseif($role == 'pptk')
+          <!-- Dashboards -->
+          <li class="menu-item {{ request()->is('dashboard') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div data-i18n="Dashboards">Dashboards</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }}">
+                <a href="/dashboard" class="menu-link">
+                  <div data-i18n="Analytics">Dashboard</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item {{ request()->is('penjabaran') || request()->is('dpa') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bxs-spreadsheet"></i>
+              <div data-i18n="Layouts">DPA</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('dpa') ? 'active' : '' }}">
+                <a href="/dpa" class="menu-link">
+                  <div data-i18n="Without menu">Data DPA</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li
+            class="menu-item {{ request()->is('laporan/cetak_dpa') || request()->is('laporan/cetak_lra') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bxs-printer"></i>
+              <div data-i18n="Layouts">Laporan</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('laporan/cetak_dpa') ? 'active' : '' }}">
+                <a href="/laporan/cetak_dpa" class="menu-link">
+                  <div data-i18n="Without menu">Cetak DPA</div>
+                </a>
+              </li>
+            </ul>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('laporan/cetak_lra') ? 'active' : '' }}">
+                <a href="/laporan/cetak_spj" class="menu-link">
+                  <div data-i18n="Without menu">Cetak LRA</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @elseif($role == 'supervisor')
+          <!-- Dashboards -->
+          <li class="menu-item {{ request()->is('dashboard') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div data-i18n="Dashboards">Dashboards</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }}">
+                <a href="/dashboard" class="menu-link">
+                  <div data-i18n="Analytics">Dashboard</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li
+            class="menu-item {{ request()->is('laporan/cetak_dpa') || request()->is('laporan/cetak_lra') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bxs-printer"></i>
+              <div data-i18n="Layouts">Laporan</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('laporan/cetak_dpa') ? 'active' : '' }}">
+                <a href="/laporan/cetak_dpa" class="menu-link">
+                  <div data-i18n="Without menu">Cetak DPA</div>
+                </a>
+              </li>
+            </ul>
+            <ul class="menu-sub">
+              <li class="menu-item {{ request()->is('laporan/cetak_lra') ? 'active' : '' }}">
+                <a href="/laporan/cetak_spj" class="menu-link">
+                  <div data-i18n="Without menu">Cetak LRA</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @endif
+
 
 
         </ul>
@@ -286,7 +450,7 @@
               <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                   <div class="avatar avatar-online">
-                    <img src="{{ asset('img/avatars/1.png')}}" alt class="w-px-40 h-auto rounded-circle" />
+                    <img src="{{ asset('img/avatars/8.png')}}" alt class="w-px-40 h-auto rounded-circle" />
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -295,23 +459,14 @@
                       <div class="d-flex">
                         <div class="flex-shrink-0 me-3">
                           <div class="avatar avatar-online">
-                            <img src="{{ asset('img/avatars/1.png')}}" alt class="w-px-40 h-auto rounded-circle" />
+                            <img src="{{ asset('img/avatars/8.png')}}" alt class="w-px-40 h-auto rounded-circle" />
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <span class="fw-medium d-block">John Doe</span>
-                          <small class="text-muted">Admin</small>
+                          <span class="fw-medium d-block">{{ $user->name }}</span>
+                          <small class="text-muted">{{ $user->role }}</small>
                         </div>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <i class="bx bx-user me-2"></i>
-                      <span class="align-middle">Profil Saya</span>
                     </a>
                   </li>
                   <li>
@@ -339,19 +494,17 @@
         <!-- Content wrapper -->
         <div class="content-wrapper">
           <!-- Content -->
-          <div class="container-xxl flex-grow-1 container-p-y">
-            @if(session()->has('success'))
-            <div class="alert alert-primary d-flex" role="alert">
-              <span class="badge badge-center rounded-pill bg-primary border-label-primary p-3 me-2"><i
-                  class='bx bx-like bx-flashing'></i></span>
-              <div class="d-flex flex-column ps-1">
-                <h6 class="alert-heading d-flex align-items-center fw-bold mb-1">Notifikasi </h6>
-                <span>{{ session('success') }}</span>
-              </div>
+          @if(session()->has('success'))
+          <div class="alert alert-primary d-flex" role="alert">
+            <span class="badge badge-center rounded-pill bg-primary border-label-primary p-3 me-2"><i
+                class='bx bx-like bx-flashing'></i></span>
+            <div class="d-flex flex-column ps-1">
+              <h6 class="alert-heading d-flex align-items-center fw-bold mb-1">Notifikasi </h6>
+              <span>{{ session('success') }}</span>
             </div>
-            @endif
-            @yield('content')
           </div>
+          @endif
+          @yield('content')
         </div>
         <!-- / Content -->
 
@@ -433,6 +586,12 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+    new AirDatepicker('.datepickerTglSpj1', {
+      autoClose: true
+    })
+    new AirDatepicker('.datepickerTglSpj2', {
+      autoClose: true
+    })
     new AirDatepicker('.datepickerTglSpj', {
       autoClose: true
     })
@@ -445,11 +604,39 @@
     new AirDatepicker('.datepickerTglBast', {
       autoClose: true
     })       
+    new AirDatepicker('.datepickerTglCair', {
+      autoClose: true
+    })       
 });
 </script>
 <!-- Start DataTables. -->
 <script type="text/javascript">
   $(function () {  
+    var table = $('#data_table_user').DataTable({
+        processing: true,
+        responsive: true,
+        orderable: true,
+        serverSide: true,
+        order: [[ 1, 'asc' ]],
+        ajax: "{{ route('user.index') }}",
+        columns: [
+          {  
+            "data": null,
+            "class": "align-top",
+            "orderable": false,
+            "searchable": false,
+            "render": function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }  
+          },  
+            {data: 'name', name: 'name'},
+            {data: 'username', name: 'username'},
+            {data: 'email', name: 'email'},
+            {data: 'role', name: 'role'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+      });
+
       var table = $('#data_table_bagian').DataTable({
         processing: true,
         responsive: true,
@@ -666,7 +853,73 @@
             {data: 'total_spj', name: 'total_spj'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
-    });  
+    }); 
+    
+    var table = $('#data_table_pencairan').DataTable({
+        processing: true,
+        responsive: true,
+        orderable: true,
+        serverSide: true,
+        order: [[ 1, 'asc' ]],
+        ajax: "{{ route('pencairan.index') }}",
+        columns: [
+          {  
+            "data": null,
+            "class": "align-top",
+            "orderable": false,
+            "searchable": false,
+            "render": function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }  
+          }, 
+            {data: 'tanggal_spj', name: 'tanggal_spj'},
+            {data: 'uraian', name: 'uraian'},
+            {data: 'nama_bagian', name: 'nama_bagian'},
+            {data: 'kode_sub_kegiatan', name: 'kode_sub_kegiatan'},
+            {data: 'total_spj', name: 'total_spj'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    }); 
+
+  var table = $('#data_table_pilih_cair').DataTable({
+        processing: true,
+        responsive: true,
+        orderable: true,
+        serverSide: true,
+        order: [[ 1, 'asc' ]],
+        ajax: "{{ route('pencairan.create') }}",
+        columns: [
+          {  
+            "data": null,
+            "class": "align-top",
+            "orderable": false,
+            "searchable": false,
+            "render": function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }  
+          }, 
+            {data: 'tanggal_spj', name: 'tanggal_spj'},
+            {data: 'uraian', name: 'uraian'},
+            {data: 'nama_bagian', name: 'nama_bagian'},
+            {data: 'kode_sub_kegiatan', name: 'kode_sub_kegiatan'},
+            {data: 'nama_sub_kegiatan', name: 'nama_sub_kegiatan'},
+            {data: 'total_spj', name: 'total_spj'},
+        ]
+    });   
+
+    var table = $('#data_table_pilih_cair').DataTable();
+    var tableBody = '#data_table_pilih_cair tbody';
+    $(tableBody).on('click', 'tr', function () {
+        var cursor = table.row($(this));//get the clicked row
+        var data=cursor.data();// this will give you the data in the current row.
+        $('#exLargeModal').modal('toggle');
+        $('.tanggal_spj p').text(data["tanggal_spj"]);
+        $('.nama_bagian p').text(data["nama_bagian"]);
+        $('.kode_sub_kegiatan p').text(data["kode_sub_kegiatan"]+ ' | ' + data["nama_sub_kegiatan"]);
+        $('.total_spj p').text('Rp. ' + data["total_spj"]);
+        $('.uraian p').text(data["uraian"]);
+        document.getElementById("spj_id").value = data["spj_id"];
+    } );    
   });
 
 </script>
@@ -695,6 +948,28 @@
                     results: $.map(data, function (item) {
                         return {
                             text: item.no_rekening+' | '+item.nama_rekening,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+    $('.livesearch_kegiatan_all').select2({
+        theme: "bootstrap-5",
+        allowClear: true,
+        width: '100%',
+        placeholder: 'Pilih nama kegiatan',
+        ajax: {
+            url: '/select2/pilih_keg',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.kode_kegiatan+' | '+item.nama_kegiatan,
                             id: item.id
                         }
                     })
@@ -946,6 +1221,10 @@ $(document).ready(function(){
       {
           $('#jumlah').val($('#satuan').val() * $('#harga').val());
       }
+
+
+
+
 });
 
 </script>
@@ -1061,6 +1340,41 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }  
+
+$(document).ready(function(){
+
+$('#username').blur(function(){
+ var error_uname = '';
+ var username = $('#username').val();
+ var _token = $('input[name="_token"]').val();
+
+ 
+  $.ajax({
+   url:"{{ route('uname_available.check') }}",
+   method:"POST",
+   data:{username:username, _token:_token},
+   success:function(result)
+   {
+    if(result == 'unique')
+    {
+     $('#error_username').html('<label class="text-success">Username Tersedia</label>');
+     $('#username').removeClass('has-error');
+     $('#register').attr('disabled', false);
+    }
+    else
+    {
+     $('#error_username').html('<label class="text-danger">Username Tidak Tersedia</label>');
+     $('#username').addClass('has-error');
+     $('#register').attr('disabled', 'disabled');
+    }
+   }
+  })
+  
+});
+
+});
+
+
 </script>
 
 <!-- End Dynamic Button. -->

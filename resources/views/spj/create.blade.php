@@ -25,8 +25,8 @@
             <div class="col-md-6">
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal SPJ</label>
-                <input type="text" class="datepickerTglSpj form-control" name="tanggal_spj" id="basic-default-fullname "
-                  autocomplete="off" />
+                <input type="text" class="datepickerTglSpj form-control" readonly="" name="tanggal_spj"
+                  id="basic-default-fullname " autocomplete="off" />
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlSelect1" class="form-label">Jenis SPJ</label>
@@ -39,7 +39,7 @@
               </div>
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal Kontrak/No Pesanan</label>
-                <input type="text" class="datepickerTglKontrak form-control" name="tgl_kontrak"
+                <input type="text" class="datepickerTglKontrak form-control" readonly="" name="tgl_kontrak"
                   id="basic-default-fullname " autocomplete="off" />
               </div>
               <div class="mb-3">
@@ -49,8 +49,8 @@
               </div>
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal BAPHP</label>
-                <input type="text" class="datepickerTglBaphp form-control" name="tgl_baphp" id="basic-default-fullname "
-                  autocomplete="off" />
+                <input type="text" class="datepickerTglBaphp form-control" name="tgl_baphp" readonly=""
+                  id="basic-default-fullname " autocomplete="off" />
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlSelect1" class="form-label">Nomor BAPHP</label>
@@ -61,8 +61,8 @@
             <div class="col-md-6">
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal BAST</label>
-                <input type="text" class="datepickerTglBast form-control" name="tgl_bast" id="basic-default-fullname "
-                  autocomplete="off" />
+                <input type="text" class="datepickerTglBast form-control" name="tgl_bast" readonly=""
+                  id="basic-default-fullname " autocomplete="off" />
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlSelect1" class="form-label">Nomor BAST</label>

@@ -16,7 +16,7 @@
         </ul>
       </div>
       @endif
-      <form action="/laporan/cetak_pdf_dpa" method="POST">
+      <form action="/laporan/cetak_pdf_dpa" method="POST" formtarget="_blank" target="_blank">
         @csrf
         <div class="mb-3">
           <label class="form-label" for="basic-default-fullname">Penjabaran</label>

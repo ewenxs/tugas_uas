@@ -196,4 +196,100 @@ class Select2Controller extends Controller
                           ->get();
         return response()->json($data);
     }  
+
+    public function pilihSpjCair(Request $request)
+    {
+        if($request->ajax())
+        {
+            $output = '';
+            $query = $request->get('query');
+            if($query != '') {
+                $data = DB::table('spjs')
+                ->join('bagians', 'spjs.bagian_id', '=', 'bagians.id')
+                ->join('kegiatans', 'spjs.kegiatan_id', '=', 'kegiatans.id')
+                ->join('sub_kegiatans', 'spjs.sub_kegiatan_id', '=', 'sub_kegiatans.id')
+                ->where('spjs.id', '=', $query)   
+                ->select('spjs.tanggal_spj',
+                        'bagians.nama_bagian',
+                        'kegiatans.kode_kegiatan',
+                        'kegiatans.nama_kegiatan',
+                        'sub_kegiatans.kode_sub_kegiatan',
+                        'sub_kegiatans.nama_sub_kegiatan',
+                        'spjs.uraian')                        
+                ->get();
+            } else {
+                $data = DB::table('spjs')
+                ->join('bagians', 'spjs.bagian_id', '=', 'bagians.id')
+                ->join('kegiatans', 'spjs.kegiatan_id', '=', 'kegiatans.id')
+                ->join('sub_kegiatans', 'spjs.sub_kegiatan_id', '=', 'sub_kegiatans.id')
+                ->where('spjs.id', '=', 26)   
+                ->select('spjs.tanggal_spj',
+                        'bagians.nama_bagian',
+                        'kegiatans.kode_kegiatan',
+                        'kegiatans.nama_kegiatan',
+                        'sub_kegiatans.kode_sub_kegiatan',
+                        'sub_kegiatans.nama_sub_kegiatan',
+                        'spjs.uraian')                        
+                ->get();
+            }
+             
+            $total_row = $data->count();
+            if($total_row > 0){
+                foreach($data as $row)
+                {
+                    
+                    $output .= '
+                                <div class="mb-3">
+                                  <label for="exampleFormControlSelect1" class="form-label">Tanggal SPJ</label>
+                                  <label for="exampleFormControlSelect1" class="form-label">: '.$row->tanggal_spj.'</label>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="exampleFormControlSelect1" class="form-label">Seksi / Subbag</label>
+                                  <label for="exampleFormControlSelect1" class="form-label">: '.$row->nama_bagian.'</label>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="exampleFormControlSelect1" class="form-label">Kode Kegiatan</label>
+                                  <label for="exampleFormControlSelect1" class="form-label">: '.$row->kode_kegiatan.' | '.$row->nama_kegiatan.'</label>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="exampleFormControlSelect1" class="form-label">Kode Sub Kegiatan</label>
+                                  <label for="exampleFormControlSelect1" class="form-label">: '.$row->kode_sub_kegiatan.' | '.$row->nama_sub_kegiatan.'</label>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="exampleFormControlSelect1" class="form-label">Uraian</label>
+                                  <label for="exampleFormControlSelect1" class="form-label">: '.$row->uraian.'</label>
+                                </div>
+                                ';
+                }
+            } else {
+                $output .= '
+                <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Tanggal SPJ</label>
+                  <label for="exampleFormControlSelect1" class="form-label">: </label>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Seksi / Subbag</label>
+                  <label for="exampleFormControlSelect1" class="form-label">: </label>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Kode Kegiatan</label>
+                  <label for="exampleFormControlSelect1" class="form-label">: </label>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Kode Sub Kegiatan</label>
+                  <label for="exampleFormControlSelect1" class="form-label">: </label>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Uraian</label>
+                  <label for="exampleFormControlSelect1" class="form-label">: </label>
+                </div>
+                ';
+            }
+            $data = array(
+                'table_data'  => $output
+            );
+            echo json_encode($data);
+        }
+
+    }       
 }

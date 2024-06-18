@@ -8,7 +8,7 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Sistem Informasi Pelaporan Realisasi Anggaran Kecamatan Kademangan</title>
+  <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
   <meta name="description" content="" />
 
@@ -49,7 +49,7 @@
   <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
       <div class="authentication-inner">
-        <!-- Register -->
+        <!-- Register Card -->
         <div class="card">
           <div class="card-body">
             <!-- Logo -->
@@ -99,71 +99,111 @@
                     </g>
                   </svg>
                 </span>
-                <span class="app-brand-text demo text-body fw-bold">SIPRA</span>
+                <span class="app-brand-text demo text-body fw-bold">Sneat</span>
               </a>
             </div>
             <!-- /Logo -->
 
-            <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('login') }}">
+            <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('register') }}">
               @csrf
               <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan Username"
-                  autofocus />
+                <label for="name" class="form-label">{{ __('Name') }}</label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                  placeholder="masukkan nama anda" value="{{ old('name') }}" required autocomplete="name" autofocus />
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
+                  placeholder="Enter your email" value="{{ old('email') }}" required autocomplete="email" />
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">{{ __('Level User') }}</label>
+                <select class="form-select @error('role') is-invalid @enderror" id="role"
+                  aria-label="Default select example">
+                  <option selected>Pilih level user</option>
+                  <option value="supervisor">Supervisor</option>
+                  <option value="pptk">PPTK</option>
+                  <option value="bendahara">Bendahara</option>
+                </select>
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <div class="mb-3 form-password-toggle">
-                <div class="d-flex justify-content-between">
-                  <label class="form-label" for="password">Password</label>
-                </div>
+                <label class="form-label" for="password">{{ __('Password') }}</label>
                 <div class="input-group input-group-merge">
-                  <input type="password" id="password" class="form-control" name="password"
+                  <input type="password" id="password" class="form-control @error('password') is-invalid @enderror"
+                    name="password" required autocomplete="new-password"
                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                     aria-describedby="password" />
+                  @error('password')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                 </div>
               </div>
-              <div class="mb-3">
-                <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+              <div class="mb-3 form-password-toggle">
+                <label class="password-confirm" for="password">{{ __('Confirm Password') }}</label>
+                <div class="input-group input-group-merge">
+                  <input type="password" id="password-confirm"
+                    class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required
+                    autocomplete="new-password"
+                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                    aria-describedby="password" />
+                  @error('password')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                  <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                </div>
               </div>
-            </form>
 
-            <!-- /Register 
-              <p class="text-center">
-                <span>belum punya akun?</span>
-                <a href="/register">
-                  <span>klik disini</span>
-                </a>
-              </p>
-            </div>
-          </div> 
-        -->
-            <!-- /Register -->
+              <button class="btn btn-primary d-grid w-100">{{ __('Register') }}</button>
+            </form>
           </div>
         </div>
+        <!-- Register Card -->
       </div>
+    </div>
+  </div>
 
-      <!-- / Content -->
+  <!-- / Content -->
 
-      <!-- Core JS -->
-      <!-- build:js assets/vendor/js/core.js -->
+  <!-- Core JS -->
+  <!-- build:js assets/vendor/js/core.js -->
 
-      <script src="{{ asset('vendor/libs/jquery/jquery.js') }}"></script>
-      <script src="{{ asset('vendor/libs/popper/popper.js') }}"></script>
-      <script src="{{ asset('vendor/js/bootstrap.js') }}"></script>
-      <script src="{{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-      <script src="{{ asset('vendor/js/menu.js') }}"></script>
+  <script src="{{ asset('vendor/libs/jquery/jquery.js') }}"></script>
+  <script src="{{ asset('vendor/libs/popper/popper.js') }}"></script>
+  <script src="{{ asset('vendor/js/bootstrap.js') }}"></script>
+  <script src="{{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+  <script src="{{ asset('vendor/js/menu.js') }}"></script>
 
-      <!-- endbuild -->
+  <!-- endbuild -->
 
-      <!-- Vendors JS -->
+  <!-- Vendors JS -->
 
-      <!-- Main JS -->
-      <script src="{{ asset('js/main.js') }}"></script>
+  <!-- Main JS -->
+  <script src="{{ asset('js/main.js') }}"></script>
 
-      <!-- Page JS -->
+  <!-- Page JS -->
 
-      <!-- Place this tag in your head or just before your close body tag. -->
-      <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>

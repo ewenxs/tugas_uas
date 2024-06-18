@@ -78,46 +78,143 @@ class LaporanController extends Controller
 
     public function laporanPdfSpj(Request $request)
     {
-            $tr_spj = DB::table('dpas')
-                          ->join('kegiatans', 'dpas.kegiatan_id', '=', 'kegiatans.id')
-                          ->join('sub_kegiatans', 'dpas.sub_kegiatan_id', '=', 'sub_kegiatans.id')
-                          ->join('detail_dpas', 'dpas.id', '=', 'detail_dpas.dpa_id')
-                          ->join('rekenings', 'rekenings.id', '=', 'dpas.rekening_id')
-                          ->join('programs', 'programs.id', '=', 'dpas.program_id')
-                          ->select('kegiatans.kode_kegiatan as kode_kegiatan',
-                                   'sub_kegiatans.kode_sub_kegiatan as kode_sub_kegiatan',
-                                   'rekenings.no_rekening as no_rekening',
-                                   'programs.nama_program as nama_program',
-                                   'detail_dpas.nama_barang as nama_barang',
-                                   'detail_dpas.id as detail_dpa_id',
-                                   'dpas.rekening_id as rekening_id',
-                                   'dpas.program_id as program_id',
-                                   'dpas.id as dpa_id'
-                                )
-                             ->selectSub(
-                                 DB::table('detail_spjs')
-                                     ->selectRaw('SUM(satuan*harga)')
-                                     ->whereColumn('detail_spjs.rekening_id', 'dpas.rekening_id')
-                                     ->whereColumn('detail_spjs.program_id', 'dpas.program_id')
-                                     ->whereColumn('detail_spjs.detail_dpa_id', 'detail_dpas.id'),
-                                 'nominal',
-                             )
-                             ->selectSub(
-                                DB::table('detail_dpas')
-                                    ->selectRaw('SUM(volume*harga)')
-                                    ->whereColumn('detail_dpas.id', 'detail_dpa_id')
-                                    ->whereColumn('detail_dpas.dpa_id', 'dpa_id'),
-                                'anggaran',
-                            )
-                             ->where('dpas.sub_kegiatan_id','=', 21)
-                             ->orderBy('rekenings.no_rekening','ASC')
-                             ->orderBy('programs.nama_program','ASC')
-                             ->get();
+        $request->validate([
+            'tanggal_mulai_spj' => 'required',
+            'tanggal_akhir_spj' => 'required',
+            'sub_kegiatan_id' => 'required|min:1',
+        ]);
 
-    $pdf = Pdf::loadview('laporan/spj_pdf',['tr_spj' => $tr_spj])->setPaper(array(0,0,609.4488,935.433), 'landscape');
+        $from = $request->tanggal_mulai_spj;
+        $to = $request->tanggal_akhir_spj;
+        $pencairan = $request->pencairan;
+
+if ($pencairan == 'no') {
+    $tr_spj = DB::table('dpas')
+    ->join('kegiatans', 'dpas.kegiatan_id', '=', 'kegiatans.id')
+    ->join('sub_kegiatans', 'dpas.sub_kegiatan_id', '=', 'sub_kegiatans.id')
+    ->join('detail_dpas', 'dpas.id', '=', 'detail_dpas.dpa_id')
+    ->join('rekenings', 'rekenings.id', '=', 'dpas.rekening_id')
+    ->join('programs', 'programs.id', '=', 'dpas.program_id')
+    ->select('kegiatans.kode_kegiatan as kode_kegiatan',
+             'sub_kegiatans.kode_sub_kegiatan as kode_sub_kegiatan',
+             'rekenings.no_rekening as no_rekening',
+             'programs.nama_program as nama_program',
+             'detail_dpas.nama_barang as nama_barang',
+             'detail_dpas.id as detail_dpa_id',
+             'dpas.rekening_id as rekening_id',
+             'dpas.program_id as program_id',
+             'dpas.id as dpa_id'
+          )
+       ->selectSub(
+           DB::table('spjs')
+               ->join('detail_spjs','detail_spjs.spj_id','=','spjs.id')
+               ->selectRaw('SUM(detail_spjs.satuan*detail_spjs.harga)')
+               ->whereColumn('detail_spjs.rekening_id', 'dpas.rekening_id')
+               ->whereColumn('detail_spjs.program_id', 'dpas.program_id')
+               ->whereColumn('detail_spjs.detail_dpa_id', 'detail_dpas.id')
+               ->whereNotIn('detail_spjs.spj_id', function($q){
+                 $q->select('spj_id')->from('pencairans');
+               })
+               ->whereBetween('spjs.tanggal_spj', [$from, $to]),
+           'nominal',
+       )
+       ->selectSub(
+          DB::table('detail_dpas')
+              ->selectRaw('SUM(volume*harga)')
+              ->whereColumn('detail_dpas.id', 'detail_dpa_id')
+              ->whereColumn('detail_dpas.dpa_id', 'dpa_id'),
+          'anggaran',
+      )
+       ->where('dpas.sub_kegiatan_id','=', $request->sub_kegiatan_id)  
+       ->orderBy('rekenings.no_rekening','ASC')
+       ->orderBy('programs.nama_program','ASC')
+       ->get();
+}elseif ($pencairan == 'yes') {
+    $tr_spj = DB::table('dpas')
+    ->join('kegiatans', 'dpas.kegiatan_id', '=', 'kegiatans.id')
+    ->join('sub_kegiatans', 'dpas.sub_kegiatan_id', '=', 'sub_kegiatans.id')
+    ->join('detail_dpas', 'dpas.id', '=', 'detail_dpas.dpa_id')
+    ->join('rekenings', 'rekenings.id', '=', 'dpas.rekening_id')
+    ->join('programs', 'programs.id', '=', 'dpas.program_id')
+    ->select('kegiatans.kode_kegiatan as kode_kegiatan',
+             'sub_kegiatans.kode_sub_kegiatan as kode_sub_kegiatan',
+             'rekenings.no_rekening as no_rekening',
+             'programs.nama_program as nama_program',
+             'detail_dpas.nama_barang as nama_barang',
+             'detail_dpas.id as detail_dpa_id',
+             'dpas.rekening_id as rekening_id',
+             'dpas.program_id as program_id',
+             'dpas.id as dpa_id'
+          )
+       ->selectSub(
+           DB::table('spjs')
+               ->join('detail_spjs','detail_spjs.spj_id','=','spjs.id')
+               ->selectRaw('SUM(detail_spjs.satuan*detail_spjs.harga)')
+               ->whereColumn('detail_spjs.rekening_id', 'dpas.rekening_id')
+               ->whereColumn('detail_spjs.program_id', 'dpas.program_id')
+               ->whereColumn('detail_spjs.detail_dpa_id', 'detail_dpas.id')
+               ->whereIn('detail_spjs.spj_id', function($q){
+                 $q->select('spj_id')->from('pencairans');
+               })
+               ->whereBetween('spjs.tanggal_spj', [$from, $to]),
+           'nominal',
+       )
+       ->selectSub(
+          DB::table('detail_dpas')
+              ->selectRaw('SUM(volume*harga)')
+              ->whereColumn('detail_dpas.id', 'detail_dpa_id')
+              ->whereColumn('detail_dpas.dpa_id', 'dpa_id'),
+          'anggaran',
+      )
+       ->where('dpas.sub_kegiatan_id','=', $request->sub_kegiatan_id)  
+       ->orderBy('rekenings.no_rekening','ASC')
+       ->orderBy('programs.nama_program','ASC')
+       ->get();
+}else {
+    $tr_spj = DB::table('dpas')
+    ->join('kegiatans', 'dpas.kegiatan_id', '=', 'kegiatans.id')
+    ->join('sub_kegiatans', 'dpas.sub_kegiatan_id', '=', 'sub_kegiatans.id')
+    ->join('detail_dpas', 'dpas.id', '=', 'detail_dpas.dpa_id')
+    ->join('rekenings', 'rekenings.id', '=', 'dpas.rekening_id')
+    ->join('programs', 'programs.id', '=', 'dpas.program_id')
+    ->select('kegiatans.kode_kegiatan as kode_kegiatan',
+             'sub_kegiatans.kode_sub_kegiatan as kode_sub_kegiatan',
+             'rekenings.no_rekening as no_rekening',
+             'programs.nama_program as nama_program',
+             'detail_dpas.nama_barang as nama_barang',
+             'detail_dpas.id as detail_dpa_id',
+             'dpas.rekening_id as rekening_id',
+             'dpas.program_id as program_id',
+             'dpas.id as dpa_id'
+          )
+       ->selectSub(
+           DB::table('spjs')
+               ->join('detail_spjs','detail_spjs.spj_id','=','spjs.id')
+               ->selectRaw('SUM(detail_spjs.satuan*detail_spjs.harga)')
+               ->whereColumn('detail_spjs.rekening_id', 'dpas.rekening_id')
+               ->whereColumn('detail_spjs.program_id', 'dpas.program_id')
+               ->whereColumn('detail_spjs.detail_dpa_id', 'detail_dpas.id')
+               ->whereBetween('spjs.tanggal_spj', [$from, $to]),
+           'nominal',
+       )
+       ->selectSub(
+          DB::table('detail_dpas')
+              ->selectRaw('SUM(volume*harga)')
+              ->whereColumn('detail_dpas.id', 'detail_dpa_id')
+              ->whereColumn('detail_dpas.dpa_id', 'dpa_id'),
+          'anggaran',
+      )
+       ->where('dpas.sub_kegiatan_id','=', $request->sub_kegiatan_id)  
+       ->orderBy('rekenings.no_rekening','ASC')
+       ->orderBy('programs.nama_program','ASC')
+       ->get();
+}
+
+
+
+    $pdf = Pdf::loadview('laporan/spj_pdf',['tr_spj' => $tr_spj, 'from' => $from, 'to' => $to, 'to' => $to, 'pencairan' => $pencairan])->setPaper(array(0,0,609.4488,935.433), 'landscape');
     	
     return $pdf->stream('laporan-spj.pdf', array("Attachment" => 0));
-                                //return view('laporan.spj_pdf',compact(['tr_spj']));
 
     }     
 }

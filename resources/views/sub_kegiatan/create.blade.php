@@ -30,7 +30,7 @@
         </div>
         <div class="mb-3">
           <label for="exampleFormControlSelect1" class="form-label">Nama kegiatan</label>
-          <select name="kegiatan_id" class="livesearch_kegiatan form-select" aria-label="Default select example">
+          <select name="kegiatan_id" class="livesearch_kegiatan_all form-select" aria-label="Default select example">
           </select>
         </div>
         <div class="mb-3">

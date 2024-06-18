@@ -15,19 +15,20 @@ class RekeningController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                            $btn =  '<div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Action
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="rekening/'.$row->id.'/edit">Edit</a></li>
-                                            <form action="/rekening/'.$row->id.'" method="POST">
-                                            '.csrf_field().'
-                                            '.method_field("DELETE").'
-                                            <input type="submit" class="dropdown-item" onclick="return confirm(\'Apakah anda yakin ?\')" value="Delete">
-                                          </form></li>
-                                        </ul>
-                                    </div> ';
+               $btn =  '<div class="btn-group" id="dropdown-icon-demo">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bx bx-menu me-1"></i> Action </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="rekening/'.$row->id.'/edit">Edit</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><form action="/rekening/'.$row->id.'" method="POST">
+                                       '.csrf_field().'
+                                       '.method_field("DELETE").'
+                                       <input type="submit" class="dropdown-item" onclick="return confirm(\'Apakah anda yakin ?\')" value="Delete">
+                             </form>
+                        </li>
+                        </ul>
+                        </div>';
       
                             return $btn;
                     })

@@ -27,18 +27,18 @@
         </div>
         <div class="mb-3">
           <label for="exampleFormControlSelect1" class="form-label">Nama Bagian</label>
-          <select name="bagian_id" class="livesearch_bagian form-select" aria-label="Default select example">
+          <select name="bagian_id" class="livesearch_bagian_spj form-select" aria-label="Default select example">
           </select>
         </div>
         <div class="mb-3">
           <label for="exampleFormControlSelect1" class="form-label">Nama kegiatan</label>
-          <select name="kegiatan_id" class="livesearch_kegiatan form-select" id="kegiatan_dropdown"
+          <select name="kegiatan_id" class="livesearch_kegiatan_spj form-select" id="kegiatan_dropdown"
             aria-label="Default select example">
           </select>
         </div>
         <div class="mb-3">
           <label for="exampleFormControlSelect1" class="form-label">Nama Sub kegiatan</label>
-          <select name="sub_kegiatan_id" class="livesearch_sub_kegiatan form-select" id="sub_kegiatan_dropdown"
+          <select name="sub_kegiatan_id" class="livesearch_sub_kegiatan_spj form-select" id="sub_kegiatan_dropdown"
             aria-label="Default select example">
           </select>
         </div>
@@ -66,7 +66,7 @@
                 <th scope="col">Harga</th>
                 <th scope="col">Jumlah</th>
                 <th scope="col">
-                  <button type="button" class="btn btn-sm btn-success" onclick="BtnAdd()">+</button>
+                  <button type="button" class="btn btn-sm btn-primary" onclick="BtnAdd()">+</button>
                 </th>
               </tr>
             </thead>
