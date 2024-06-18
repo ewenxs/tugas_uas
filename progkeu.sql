@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
 -- Generation Time: Jun 18, 2024 at 06:10 PM
+=======
+-- Generation Time: May 25, 2024 at 07:14 PM
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -255,6 +259,10 @@ INSERT INTO `detail_dpas` (`id`, `dpa_id`, `nama_barang`, `volume`, `satuan`, `h
 (223, 128, 'Honorarium Tim Pelaksana Kegiatan dan Sekretariat Tim Pelaksana Kegiatan - TP PKK\r\nSpesifikasi: Sekretaris', 12, 'Orang / Bulan', 225000, '2024-05-16 05:38:45', '2024-05-16 05:38:45'),
 (224, 129, 'Honorarium Tim Pelaksana Kegiatan dan Sekretariat Tim Pelaksana Kegiatan - TP PKK\r\nSpesifikasi: Sekretaris', 72, 'Orang / Bulan', 225000, '2024-05-16 05:39:42', '2024-05-16 05:39:42'),
 (225, 130, 'Honorarium Tim Pelaksana Kegiatan dan Sekretariat Tim Pelaksana Kegiatan - TP PKK\r\nSpesifikasi: Wakil Ketua', 12, 'Orang / Bulan', 225000, '2024-05-16 05:40:46', '2024-05-16 05:40:46'),
+<<<<<<< HEAD
+=======
+(226, 131, 'Honorarium Tim Pelaksana Kegiatan dan Sekretariat Tim Pelaksana Kegiatan - TP PKK\r\nSpesifikasi: Wakil Ketua', 12, 'Orang / Bulan', 225000, '2024-05-16 05:40:47', '2024-05-16 05:40:47'),
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 (227, 132, 'Honorarium Tim Pelaksana Kegiatan dan Sekretariat Tim Pelaksana Kegiatan - TP PKK\r\nSpesifikasi: Wakil Ketua', 72, 'Orang / Bulan', 225000, '2024-05-16 05:41:49', '2024-05-16 05:41:49'),
 (228, 133, 'Honorarium/Upah/Gaji untuk pegawai Non ASN - Rumpun Tenaga Teknis\r\nSpesifikasi: Pegawai Tidak Tetap Tenaga Teknis', 11, 'Orang / Bulan', 1870000, '2024-05-16 05:43:06', '2024-05-16 05:43:06'),
 (229, 134, 'Jasa Penyelenggaraan Acara\r\nSpesifikasi: Backdrop / Banner', 12, 'Meter', 30000, '2024-05-16 05:44:20', '2024-05-16 05:44:20'),
@@ -277,6 +285,10 @@ INSERT INTO `detail_dpas` (`id`, `dpa_id`, `nama_barang`, `volume`, `satuan`, `h
 (246, 150, 'Belanja Modal Jaringan Listrik Lainnya\r\nSpesifikasi: Perencanaan PJU Solar Cell (DED)', 5, 'paket', 1100000, '2024-05-16 05:58:42', '2024-05-16 05:58:42'),
 (247, 151, 'Pembangunan PJU Solar Cell\r\nSpesifikasi: PJU Solar Cell', 5, 'Paket', 27900000, '2024-05-16 05:59:36', '2024-05-16 05:59:36'),
 (248, 152, 'Belanja Modal Jaringan Listrik Lainnya\r\nSpesifikasi: Pengawasan PJU Solar Cell (SPV)', 5, 'Paket', 1000000, '2024-05-16 06:00:29', '2024-05-16 06:00:29'),
+<<<<<<< HEAD
+=======
+(249, 153, 'Belanja Gaji Pokok PNS', 1, 'Tahun', 3018933648, '2024-05-16 06:17:33', '2024-05-16 06:17:33'),
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 (251, 155, 'Belanja Tunjangan Jabatan PNS', 1, 'Tahun', 239850000, '2024-05-16 06:20:44', '2024-05-16 06:20:44'),
 (252, 154, 'Belanja Tunjangan Keluarga PNS', 1, 'Tahun', 326875969, '2024-05-16 06:21:24', '2024-05-16 06:21:24'),
 (253, 156, 'Belanja Tunjangan Fungsional PNS', 1, 'Tahun', 5535000, '2024-05-16 06:22:45', '2024-05-16 06:22:45'),
@@ -335,10 +347,17 @@ INSERT INTO `detail_dpas` (`id`, `dpa_id`, `nama_barang`, `volume`, `satuan`, `h
 (319, 171, 'Isi staples\r\nSpesifikasi: Isi staples 10- 1m', 60, 'Pack', 4100, '2024-05-16 07:36:42', '2024-05-16 07:36:42'),
 (320, 171, 'Isolasi Bening Besar\r\nSpesifikasi: Isolasi Bening Besar', 15, 'Buah', 11000, '2024-05-16 07:36:42', '2024-05-16 07:36:42'),
 (321, 171, 'Isolasi Lakban Hitam\r\nSpesifikasi: Isolasi Lakban Hitam', 30, 'Buah', 15000, '2024-05-16 07:36:42', '2024-05-16 07:36:42'),
+<<<<<<< HEAD
 (322, 171, 'Lem kertas\r\nSpesifikasi: Lem kertas', 10, 'Botol', 16000, '2024-05-16 07:36:42', '2024-05-16 07:36:42'),
 (323, 171, 'Map Plastik\r\nSpesifikasi: snelhecter', 5, 'Pack', 42000, '2024-05-16 07:36:42', '2024-05-16 07:36:42'),
 (324, 171, 'Mika bening\r\nSpesifikasi: Mika bening', 20, 'Pak', 30000, '2024-05-16 07:36:42', '2024-05-16 07:36:42');
 INSERT INTO `detail_dpas` (`id`, `dpa_id`, `nama_barang`, `volume`, `satuan`, `harga`, `created_at`, `updated_at`) VALUES
+=======
+(322, 171, 'Lem kertas\r\nSpesifikasi: Lem kertas', 10, 'Botol', 16000, '2024-05-16 07:36:42', '2024-05-16 07:36:42');
+INSERT INTO `detail_dpas` (`id`, `dpa_id`, `nama_barang`, `volume`, `satuan`, `harga`, `created_at`, `updated_at`) VALUES
+(323, 171, 'Map Plastik\r\nSpesifikasi: snelhecter', 5, 'Pack', 42000, '2024-05-16 07:36:42', '2024-05-16 07:36:42'),
+(324, 171, 'Mika bening\r\nSpesifikasi: Mika bening', 20, 'Pak', 30000, '2024-05-16 07:36:42', '2024-05-16 07:36:42'),
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 (325, 171, 'Paper Klip\r\nSpesifikasi: Penjepit Kertas Binder Klips 260', 5, 'Pak', 27500, '2024-05-16 07:36:42', '2024-05-16 07:36:42'),
 (326, 171, 'Penghapus / Korektor\r\nSpesifikasi: Penghapus / Korektor Tipex', 30, 'Buah', 6500, '2024-05-16 07:36:42', '2024-05-16 07:36:42'),
 (327, 171, 'Penghapus Pensil\r\nSpesifikasi: Putih', 10, 'Buah', 3500, '2024-05-16 07:36:42', '2024-05-16 07:36:42'),
@@ -385,8 +404,12 @@ INSERT INTO `detail_dpas` (`id`, `dpa_id`, `nama_barang`, `volume`, `satuan`, `h
 (368, 182, 'Satuan Biaya Konsumsi Rapat Dalam Kantor dan Kegiatan Lapangan\r\nSpesifikasi: Mamin Rapat Kudapan', 90, 'Orang / Kali', 15000, '2024-05-16 07:55:59', '2024-05-16 07:55:59'),
 (369, 182, 'Satuan Biaya Konsumsi Rapat Dalam Kantor dan Kegiatan Lapangan\r\nSpesifikasi: Mamin Rapat - Makan', 90, 'Orang / Kali', 30000, '2024-05-16 07:55:59', '2024-05-16 07:55:59'),
 (370, 183, 'Honorarium Narasumber atau Pembahas, Moderator, Pembawa Acara, dan Panitia\r\nSpesifikasi: Honorarium Narasumber / Pembahas / Tenaga Ahli - Pejabat Eselon III ke bawah / yang disetarakan', 2, 'Orang / Jam', 900000, '2024-05-16 07:57:12', '2024-05-16 07:57:12'),
+<<<<<<< HEAD
 (371, 184, 'Jasa Penyelenggaraan Acara\r\nSpesifikasi: Backdrop / Banner', 8.333333333333332, 'Meter', 30000, '2024-05-16 07:58:16', '2024-05-16 07:58:16'),
 (372, 153, 'Belanja Gaji Pokok PNS', 1, 'Tahun', 3018933648, '2024-05-31 00:41:36', '2024-05-31 00:41:36');
+=======
+(371, 184, 'Jasa Penyelenggaraan Acara\r\nSpesifikasi: Backdrop / Banner', 8.333333333333332, 'Meter', 30000, '2024-05-16 07:58:16', '2024-05-16 07:58:16');
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 
 -- --------------------------------------------------------
 
@@ -403,7 +426,10 @@ CREATE TABLE `detail_spjs` (
   `program_id` bigint(20) NOT NULL,
   `satuan` int(20) NOT NULL,
   `harga` bigint(20) NOT NULL,
+<<<<<<< HEAD
   `catatan` tinytext DEFAULT NULL,
+=======
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -412,6 +438,7 @@ CREATE TABLE `detail_spjs` (
 -- Dumping data for table `detail_spjs`
 --
 
+<<<<<<< HEAD
 INSERT INTO `detail_spjs` (`id`, `dpa_id`, `detail_dpa_id`, `spj_id`, `rekening_id`, `program_id`, `satuan`, `harga`, `catatan`, `created_at`, `updated_at`) VALUES
 (255, 153, 372, 26, 37, 121, 1, 233737400, NULL, '2024-05-31 07:33:01', '2024-05-31 07:33:01'),
 (256, 154, 252, 26, 38, 122, 1, 24593896, NULL, '2024-05-31 07:33:01', '2024-05-31 07:33:01'),
@@ -1584,6 +1611,22 @@ INSERT INTO `detail_spjs` (`id`, `dpa_id`, `detail_dpa_id`, `spj_id`, `rekening_
 (1425, 86, 153, 53, 57, 140, 30, 6483, NULL, '2024-06-01 03:18:46', '2024-06-01 03:18:46'),
 (1426, 87, 154, 53, 58, 141, 30, 8103, NULL, '2024-06-01 03:18:46', '2024-06-01 03:18:46'),
 (1427, 87, 155, 53, 58, 141, 0, 0, NULL, '2024-06-01 03:18:46', '2024-06-01 03:18:46');
+=======
+INSERT INTO `detail_spjs` (`id`, `dpa_id`, `detail_dpa_id`, `spj_id`, `rekening_id`, `program_id`, `satuan`, `harga`, `created_at`, `updated_at`) VALUES
+(35, 88, 156, 18, 68, 152, 0, 0, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(36, 88, 157, 18, 68, 152, 0, 0, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(37, 89, 158, 18, 67, 153, 0, 0, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(38, 89, 159, 18, 67, 153, 0, 0, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(39, 89, 160, 18, 67, 153, 0, 0, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(40, 89, 161, 18, 67, 153, 2, 664000, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(41, 89, 162, 18, 67, 153, 1, 1076000, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(42, 89, 163, 18, 67, 153, 0, 0, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(43, 89, 164, 18, 67, 153, 0, 0, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(44, 89, 165, 18, 67, 153, 0, 0, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(45, 89, 166, 18, 67, 153, 0, 0, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(46, 89, 167, 18, 67, 153, 0, 0, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(47, 52, 103, 19, 25, 39, 1, 2000000, '2024-05-25 10:05:11', '2024-05-25 10:05:11');
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 
 -- --------------------------------------------------------
 
@@ -1728,6 +1771,10 @@ INSERT INTO `dpas` (`id`, `penjabaran_id`, `bagian_id`, `kegiatan_id`, `sub_kegi
 (128, 2, 8, 12, 21, 5, 96, '2024-05-16 05:38:45', '2024-05-16 05:38:45'),
 (129, 2, 8, 12, 21, 5, 97, '2024-05-16 05:39:42', '2024-05-16 05:39:42'),
 (130, 2, 8, 12, 21, 5, 98, '2024-05-16 05:40:46', '2024-05-16 05:40:46'),
+<<<<<<< HEAD
+=======
+(131, 2, 8, 12, 21, 5, 98, '2024-05-16 05:40:47', '2024-05-16 05:40:47'),
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 (132, 2, 8, 12, 21, 5, 99, '2024-05-16 05:41:49', '2024-05-16 05:41:49'),
 (133, 2, 8, 12, 21, 6, 100, '2024-05-16 05:43:06', '2024-05-16 05:43:06'),
 (134, 2, 9, 12, 21, 7, 101, '2024-05-16 05:44:20', '2024-05-16 05:44:20'),
@@ -1749,7 +1796,11 @@ INSERT INTO `dpas` (`id`, `penjabaran_id`, `bagian_id`, `kegiatan_id`, `sub_kegi
 (150, 2, 8, 12, 21, 35, 117, '2024-05-16 05:58:42', '2024-05-16 05:58:42'),
 (151, 2, 8, 12, 21, 35, 118, '2024-05-16 05:59:36', '2024-05-16 05:59:36'),
 (152, 2, 8, 12, 21, 35, 119, '2024-05-16 06:00:29', '2024-05-16 06:00:29'),
+<<<<<<< HEAD
 (153, 2, 9, 2, 3, 37, 121, '2024-05-16 06:17:33', '2024-05-31 00:41:36'),
+=======
+(153, 2, 9, 2, 3, 9, 121, '2024-05-16 06:17:33', '2024-05-16 06:17:33'),
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 (154, 2, 9, 2, 3, 38, 122, '2024-05-16 06:19:07', '2024-05-16 06:21:24'),
 (155, 2, 9, 2, 3, 39, 123, '2024-05-16 06:20:44', '2024-05-16 06:20:44'),
 (156, 2, 9, 2, 3, 40, 124, '2024-05-16 06:22:45', '2024-05-16 06:22:45'),
@@ -1991,8 +2042,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (41, '2024_05_10_053060_create_dpas_table', 9),
 (42, '2024_05_12_062049_create_detail_dpas_table', 10),
 (43, '2024_05_19_022935_create_spjs_table', 11),
+<<<<<<< HEAD
 (44, '2024_05_19_023859_create_detail_spjs_table', 12),
 (45, '2024_06_09_111043_create_pencairans_table', 13);
+=======
+(44, '2024_05_19_023859_create_detail_spjs_table', 12);
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 
 -- --------------------------------------------------------
 
@@ -2021,20 +2076,25 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pencairans`
+-- Table structure for table `penjabarans`
 --
 
-CREATE TABLE `pencairans` (
+CREATE TABLE `penjabarans` (
   `id` bigint(20) UNSIGNED NOT NULL,
+<<<<<<< HEAD
   `spj_id` bigint(20) NOT NULL,
   `tgl_pencairan` date NOT NULL,
   `no_spm` varchar(255) NOT NULL,
   `no_sp2d` varchar(255) NOT NULL,
+=======
+  `nomor_dpa` varchar(255) NOT NULL,
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `pencairans`
 --
 
@@ -2056,6 +2116,8 @@ CREATE TABLE `penjabarans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+=======
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 -- Dumping data for table `penjabarans`
 --
 
@@ -2360,6 +2422,7 @@ CREATE TABLE `spjs` (
 --
 
 INSERT INTO `spjs` (`id`, `tanggal_spj`, `jenis_spj`, `tgl_kontrak`, `no_kontrak`, `tgl_baphp`, `no_baphp`, `tgl_bast`, `no_bast`, `uraian`, `bagian_id`, `kegiatan_id`, `sub_kegiatan_id`, `created_at`, `updated_at`) VALUES
+<<<<<<< HEAD
 (26, '2024-01-04', 'LS', '2024-01-04', 'Gaji PNS Januari', '2024-01-04', 'Gaji PNS Januari', '2024-01-04', 'Gaji PNS Januari', 'Pembayaran Gaji dan Tunjangan PNS/CPNS Kecamatan Kademangan Kota Probolinggo bagian Bulan Januari 2024', 9, 2, 3, '2024-05-31 07:33:01', '2024-05-31 07:33:01'),
 (27, '2024-01-08', 'LS', '2024-01-08', 'Gaji Terusan IV Miskadi', '2024-01-08', 'Gaji Terusan IV Miskadi', '2024-01-08', 'Gaji Terusan IV Miskadi', 'Pembayaran Gaji Terusan PNS An. Miskadi, S.Sos Ke IV Kecamatan Kademangan Kota Probolinggo bagian Bulan Januari 2024', 9, 2, 3, '2024-05-31 07:41:07', '2024-05-31 07:41:07'),
 (28, '2024-01-08', 'LS', '2024-01-08', 'JKK PNS Januari 2024', '2024-01-08', 'JKK PNS Januari 2024', '2024-01-08', 'JKK PNS Januari 2024', 'Pembayaran Iuran Jaminan Kecelakaan Kerja (JKK) PNS Kecamatan Kademangan Kota Probolinggo Bagian Bulan Januari 2024', 9, 2, 3, '2024-05-31 08:14:20', '2024-05-31 08:14:20'),
@@ -2388,6 +2451,10 @@ INSERT INTO `spjs` (`id`, `tanggal_spj`, `jenis_spj`, `tgl_kontrak`, `no_kontrak
 (51, '2024-02-05', 'LS', '2024-02-05', '000020/KWT-7.01.03.2.03.02/7.01.2.13.0.00.02.0000/2024', '2024-02-05', '000020/KWT-7.01.03.2.03.02/7.01.2.13.0.00.02.0000/2024', '2024-02-05', '000020/KWT-7.01.03.2.03.02/7.01.2.13.0.00.02.0000/2024', 'Belanja Pembayaran Jasa Tenaga Teknis (PTT) Sub Kegiatan Peningkatan Kapasitas Lembaga Kemasyarakatan pada Seksi Pemberdayaan Masyarakat Bulan Januari 2024 Kecamatan Kademangan', 8, 12, 21, '2024-06-01 02:46:28', '2024-06-01 02:46:28'),
 (52, '2024-02-05', 'LS', '2024-02-05', '000001/KWT-7.01.02.2.01.02/7.01.2.13.0.00.02.0000/2024', '2024-02-05', '000001/KWT-7.01.02.2.01.02/7.01.2.13.0.00.02.0000/2024', '2024-02-05', '000001/KWT-7.01.02.2.01.02/7.01.2.13.0.00.02.0000/2024', 'Belanja Pembayaran Jasa Tenaga Administrasi (PTT) Sub Kegiatan Peningkatan Efektifitas Kegiatan Pemerintahan Bulan Januari 2024 Kecamatan Kademangan', 4, 10, 19, '2024-06-01 02:48:29', '2024-06-01 02:48:29'),
 (53, '2024-02-12', 'LS', '2024-02-12', '000003/KWT-7.01.01.2.08.04/7.01.2.13.0.00.02.0000/2024', '2024-02-12', '000003/KWT-7.01.01.2.08.04/7.01.2.13.0.00.02.0000/2024', '2024-02-12', '000003/KWT-7.01.01.2.08.04/7.01.2.13.0.00.02.0000/2024', 'Pembayaran Iuran Jaminan Kecelakaan Kerja(JKK), Jaminan Kematian(JKM) Non ASN dan BPJS Kesehatan 4 % PPNPN Kecamatan Kademangan Bagian Bulan Januari 2024 sub Kegiatan Penyediaan Jasa Pelayanan Umum Kantor Kecamatan Kademangan', 10, 8, 14, '2024-06-01 03:18:46', '2024-06-01 03:18:46');
+=======
+(18, '2024-05-01', 'GU', '2024-05-01', '900.1.3/23/425.502/SP/2024', '2024-05-01', '900.1.3/23/425.502/SP/2024', '2024-05-01', '900.1.3/23/425.502/SP/2024', 'Biaya Perjalanan Dinas Keg. Rapat Luar Kota pada Sub Kegiatan Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD di Kecamatan Kademangan', 10, 6, 11, '2024-05-25 08:55:40', '2024-05-25 08:55:40'),
+(19, '2024-05-07', 'LS', '2024-05-07', '900.1.3/23/425.502/BAST/20240', '2024-05-07', '900.1.3/23/425.502/BAST/202400', '2024-05-07', '900.1.3/23/425.502/BAST/2024000', 'Biaya Konsultasi BMD Keg. Rapat Luar Kota pada Sub Kegiatan Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD di Kecamatan Kademangan', 10, 4, 5, '2024-05-25 10:05:11', '2024-05-25 10:05:11');
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 
 -- --------------------------------------------------------
 
@@ -2528,9 +2595,9 @@ ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indexes for table `pencairans`
+-- Indexes for table `penjabarans`
 --
-ALTER TABLE `pencairans`
+ALTER TABLE `penjabarans`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2592,13 +2659,21 @@ ALTER TABLE `bagians`
 -- AUTO_INCREMENT for table `detail_dpas`
 --
 ALTER TABLE `detail_dpas`
+<<<<<<< HEAD
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=373;
+=======
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=372;
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 
 --
 -- AUTO_INCREMENT for table `detail_spjs`
 --
 ALTER TABLE `detail_spjs`
+<<<<<<< HEAD
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1582;
+=======
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 
 --
 -- AUTO_INCREMENT for table `dpas`
@@ -2628,17 +2703,24 @@ ALTER TABLE `kegiatans`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 
 --
--- AUTO_INCREMENT for table `pencairans`
+-- AUTO_INCREMENT for table `penjabarans`
 --
+<<<<<<< HEAD
 ALTER TABLE `pencairans`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `penjabarans`
 --
+=======
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 ALTER TABLE `penjabarans`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
@@ -2664,7 +2746,11 @@ ALTER TABLE `rekenings`
 -- AUTO_INCREMENT for table `spjs`
 --
 ALTER TABLE `spjs`
+<<<<<<< HEAD
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+=======
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+>>>>>>> c39d076f4ff15562f16bef31c14608eff7a3e83a
 
 --
 -- AUTO_INCREMENT for table `sub_kegiatans`
