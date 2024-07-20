@@ -12,12 +12,13 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>Tgl SPJ</th>
-            <th>Uraian</th>
-            <th>Seksi/Subbag</th>
-            <th>Kode Sub Kegiatan</th>
-            <th>Nominal</th>
-            <th>Actions</th>
+            <th style="width: 14%">Tanggal SPJ</th>
+            <th style="width: 14%">Tanggal Cair</th>
+            <th style="width: 30%">Uraian</th>
+            <th style="width: 16%">Seksi/Subbag</th>
+            <th style="width: 20%">Nominal</th>
+            <th style="width: 20%">Download SPJ</th>
+            <th style="width: 20%">Actions</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">

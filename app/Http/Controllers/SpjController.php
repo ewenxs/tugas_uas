@@ -22,17 +22,45 @@ class SpjController extends Controller
                         ->join('kegiatans', 'spjs.kegiatan_id', '=', 'kegiatans.id')
                         ->join('sub_kegiatans', 'spjs.sub_kegiatan_id', '=', 'sub_kegiatans.id')
                         ->join('detail_spjs', 'spjs.id', '=', 'detail_spjs.spj_id')
+                        ->leftjoin('pencairans', 'spjs.id', '=', 'pencairans.spj_id')
                         ->select('spjs.tanggal_spj',
                                 'spjs.uraian',
                                 'bagians.nama_bagian',
                                 'kegiatans.kode_kegiatan',
                                 'sub_kegiatans.kode_sub_kegiatan',
-                                'detail_spjs.spj_id')
+                                'detail_spjs.spj_id',
+                                'pencairans.tgl_pencairan',
+                                'pencairans.no_sp2d',)
                         ->selectRaw('sum(detail_spjs.satuan*detail_spjs.harga) AS total_spj')        
                         ->groupBy('detail_spjs.spj_id')                                      
                         ->get();
             return DataTables::of($data)
                     ->addIndexColumn()
+                    ->addColumn('BagianKodeKeg', function($row){
+                        $BagianKodeKeg =  '<small class="text-light">'.$row->kode_sub_kegiatan.'<small>
+                                           <br>
+                                           <small class="text-light">'.$row->nama_bagian.'<small>';
+          
+                                return $BagianKodeKeg;
+                        })
+                    ->addColumn('TglSpj', function ($row) {
+                            // Format the created_at column using MySQL date_format
+                            $date = date("d-m-Y", strtotime($row->tanggal_spj));
+                                    return $date;
+                            // Change the format as needed
+                        })
+                    ->addColumn('Status', function ($row) {
+                                // Format the created_at column using MySQL date_format
+                            $status = !empty($row->no_sp2d) ? 
+                                          '<span class="alert alert-primary" role="alert">
+                                          <small><i class="bx bxs-check-circle bx-sm text-primary me-3"></i>sudah dicairkan</small>
+                                          </span>' 
+                                          : '<span class="alert alert-danger" role="alert">
+                                          <small><i class="bx bxs-info-circle bx-sm text-danger me-3"></i>belum dicairkan</small>
+                                          </span>';
+                                        return $status;
+                                // Change the format as needed
+                            })
                     ->addColumn('action', function($row){
                     $btn =  '<div class="btn-group" id="dropdown-icon-demo">
                              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -52,7 +80,7 @@ class SpjController extends Controller
       
                             return $btn;
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['action','BagianKodeKeg','Status'])
                     ->editColumn('total_spj', function ($command) {
                         return number_format($command->total_spj, 0, ',', '.');
                     })

@@ -3,7 +3,7 @@
 @section('content')
 <div class="card">
   <div class="card-header pb-0">
-    <h5>EDIT PENCAIRAN</h5>
+    <h5>UPLOAD SPJ</h5>
   </div>
   <div class="table-responsive text-nowrap">
     <div class="card-body">
@@ -87,26 +87,14 @@
           </div>
         </div>
       </div>
-      <form action="/pencairan/{{ $pencairan->id }}" method="POST">
+      <!--form action="/pencairan/$pencairan->id " method="POST"-->
+      <form action="/upload-spj/{{ $pencairan->id }}" method="POST" enctype="multipart/form-data" class="dropzone"
+        id="myDragAndDropUploader">
         @method('put')
         @csrf
-        <div class="mb-3">
-          <label class="form-label" for="basic-default-fullname">Tanggal SP2D Dicairkan</label>
-          <input type="text" class="datepickerTglCair form-control" name="tgl_pencairan" readonly=""
-            id="basic-default-fullname " autocomplete="off" value="{{ $pencairan->tgl_pencairan }}" />
-          <input name="spj_id" type="text" class="form-control" id="spj_id" value="{{ $pencairan->spj_id }}">
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="basic-default-fullname">Nomor SPM</label>
-          <input name="no_spm" type="text" class="form-control" id="no_spm" value="{{ $pencairan->no_spm }}">
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="basic-default-fullname">Nomor SP2D</label>
-          <input name="no_sp2d" type="text" class="form-control" id="no_sp2d" value="{{ $pencairan->no_sp2d }}">
-        </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ url()->previous() }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Kembali</a>
-      </form>
+        <h5 id="message"></h5>
+      </form><br>
+      <a href="{{ url()->previous() }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Kembali</a>
     </div>
   </div>
 </div>

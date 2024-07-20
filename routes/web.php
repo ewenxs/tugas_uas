@@ -33,7 +33,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['role:admin,supervisor,bendahara,pptk'])->group(function(){
-    Route::get('/dashboard',[DashboardController::class,'index']);
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.index');
 
     Route::get('/select2/daftar_rek',[Select2Controller::class,'daftarRek']);
     Route::get('/select2/pilih_rek', [Select2Controller::class, 'pilihRek']);
@@ -119,8 +119,11 @@ Route::middleware(['role:admin'])->group(function(){
     Route::get('/dpa/create',[DpaController::class,'create']);
     Route::get('/dpa/{id}/edit/',[DpaController::class,'edit']);
     Route::put('/dpa/{id}',[DpaController::class,'update']);
-    Route::delete('/dpa/{id}',[DpaController::class,'destroy']);      
+    Route::delete('/dpa/{id}',[DpaController::class,'destroy']); 
+});
 
+
+Route::middleware(['role:admin,bendahara'])->group(function(){
     Route::get('spj',[SpjController::class,'index'])->name('spj.index');
     Route::get('/spj/{id}/view/',[SpjController::class,'view']);
     Route::post('/spj',[SpjController::class,'store']);
@@ -135,27 +138,12 @@ Route::middleware(['role:admin'])->group(function(){
     Route::get('/pencairan/{id}/edit/',[PencairanController::class,'edit']);
     Route::put('/pencairan/{id}',[PencairanController::class,'update']);
     Route::delete('/pencairan/{id}',[PencairanController::class,'destroy']); 
+    
+    Route::get('/upload-spj/{id}/edit/',[PencairanController::class,'editUploadSpj']);
+    Route::put('/upload-spj/{id}',[PencairanController::class,'updateUploadSpj']);
 });
 
-
-Route::middleware(['role:bendahara'])->group(function(){
-    Route::get('spj',[SpjController::class,'index'])->name('spj.index');
-    Route::get('/spj/{id}/view/',[SpjController::class,'view']);
-    Route::post('/spj',[SpjController::class,'store']);
-    Route::get('/spj/create',[SpjController::class,'create']);
-    Route::get('/spj/{id}/edit/',[SpjController::class,'edit']);
-    Route::put('/spj/{id}',[SpjController::class,'update']);
-    Route::delete('/spj/{id}',[SpjController::class,'destroy']); 
-
-    Route::get('pencairan',[PencairanController::class,'index'])->name('pencairan.index');
-    Route::post('/pencairan',[PencairanController::class,'store']);
-    Route::get('/pencairan/create',[PencairanController::class,'create'])->name('pencairan.create');
-    Route::get('/pencairan/{id}/edit/',[PencairanController::class,'edit']);
-    Route::put('/pencairan/{id}',[PencairanController::class,'update']);
-    Route::delete('/pencairan/{id}',[PencairanController::class,'destroy']); 
-});
-
-Route::middleware(['role:pptk'])->group(function(){     
+Route::middleware(['role:admin,pptk'])->group(function(){     
 
     Route::get('dpa',[DpaController::class,'index'])->name('dpa.index');
     Route::post('/dpa',[DpaController::class,'store']);

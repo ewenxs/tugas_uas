@@ -70,9 +70,10 @@ $perseSisaTrtbCair = 100 - $persenTrtbCair;
 $yearnow = date('Y');
 @endphp
 
-<!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row">
+
+        <!-- Content -->
         <div class="col-lg-6 mb-4">
             <div class="card">
                 <div class="card-body">
@@ -547,5 +548,30 @@ $yearnow = date('Y');
             </div>
         </div>
         <!--/ Transactions -->
+        <div class="col-lg-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="data_table_status_spj">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th style="width: 14%">Tanggal SPJ</th>
+                                    <th style="width: 30%">Uraian</th>
+                                    <th style="width: 16%">Seksi/Subbag</th>
+                                    <th style="width: 20%">Nominal</th>
+                                    <th style="width: 35%">Status</th>
+                                    <th style="width: 15%">Download</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                            </tbody>
+                        </table><br />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    @endsection
+</div>
+
+@endsection

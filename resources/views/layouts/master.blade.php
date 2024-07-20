@@ -13,7 +13,6 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon/favicon.ico')}}" />
-
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,6 +37,7 @@
   <link href="{{ asset('vendor/libs/select2/select2.min.css')}}" rel="stylesheet" />
   <link rel="stylesheet" href="{{ asset('vendor/libs/select2/select2-bootstrap-5-theme.min.css')}}" />
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/min/dropzone.min.css">
   <!-- Helpers -->
   <script src="{{ asset('vendor/js/helpers.js')}}"></script>
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -131,6 +131,9 @@ $user = Auth::user();
             </ul>
           </li>
           <!-- Layouts -->
+          <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Komponen</span>
+          </li>
           <li class="menu-item {{ request()->is('bagian') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class='menu-icon tf-icons bx bxs-building-house'></i>
@@ -202,6 +205,9 @@ $user = Auth::user();
             </ul>
           </li>
 
+          <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Anggaran</span>
+          </li>
           <li class="menu-item {{ request()->is('penjabaran') || request()->is('dpa') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bxs-spreadsheet"></i>
@@ -240,6 +246,9 @@ $user = Auth::user();
               </li>
             </ul>
           </li>
+          <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Dokumen</span>
+          </li>
           <li
             class="menu-item {{ request()->is('laporan/cetak_dpa') || request()->is('laporan/cetak_lra') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -260,6 +269,9 @@ $user = Auth::user();
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Akun</span>
           </li>
           <li class="menu-item {{ request()->is('user') ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -504,7 +516,9 @@ $user = Auth::user();
             </div>
           </div>
           @endif
-          @yield('content')
+          <div class="container-xxl flex-grow-1 container-p-y">
+            @yield('content')
+          </div>
         </div>
         <!-- / Content -->
 
@@ -567,11 +581,13 @@ $user = Auth::user();
   <script src="{{ asset('vendor/libs/datatables/dataTables.bootstrap5.min.js')}}"></script>
   <!-- Vendors JS -->
   <script src="{{ asset('vendor/libs/apex-charts/apexcharts.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
 
   <!-- Main JS -->
   <script src="{{ asset('js/main.js')}}"></script>
+
   <script src="https://cdn.jsdelivr.net/gh/plentz/jquery-maskmoney@master/dist/jquery.maskMoney.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/min/dropzone.min.js"></script>
 
 
   <!-- Page JS -->
@@ -827,6 +843,45 @@ $user = Auth::user();
         ]
     });  
 
+    var table = $('#data_table_status_spj').DataTable({
+        processing: true,
+        responsive: true,
+        orderable: true,
+        serverSide: true,
+        order: [[ 1, 'asc' ]],
+        pageLength : 5,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Semua']],
+        ajax: "{{ route('dashboard.index') }}",
+        columnDefs: [
+        { className: 'dt-center', targets: [ 6 ] }
+        ],
+        columns: [
+          {  
+            "data": null,
+            "class": "align-top",
+            "orderable": false,
+            "searchable": false,
+            "render": function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }  
+          }, 
+            {data: 'TglSpj', name: 'TglSpj', render: function(data,type,row) {
+                    data = '<i class="bx bxs-calendar-week bx-sm text-primary me-3"></i><small class="text-light">'+data+'</small>';
+                    return data;
+                }},
+            {data: 'uraian', name: 'uraian', render: function(data,type,row) {
+                    data = '</i><small>'+data+'</small>';
+                    return data;
+                }},
+            {data: 'BagianKodeKeg', name: 'BagianKodeKeg'},
+            {data: 'total_spj', name: 'total_spj', render: function(data,type,row) {
+                    data = '<i class="bx bxs-label bx-sm text-success me-3"></i><small>Rp. '+data+'</small>';
+                    return data;
+                }},
+            {data: 'Status', name: 'Status', orderable: false, searchable: false},
+            {data: 'Download', name: 'Download', orderable: false, searchable: false},
+        ]
+    }); 
 
     var table = $('#data_table_spj').DataTable({
         processing: true,
@@ -845,12 +900,20 @@ $user = Auth::user();
                 return meta.row + meta.settings._iDisplayStart + 1;
             }  
           }, 
-            {data: 'tanggal_spj', name: 'tanggal_spj'},
-            {data: 'uraian', name: 'uraian'},
-            {data: 'nama_bagian', name: 'nama_bagian'},
-            {data: 'kode_kegiatan', name: 'kode_kegiatan'},
-            {data: 'kode_sub_kegiatan', name: 'kode_sub_kegiatan'},
-            {data: 'total_spj', name: 'total_spj'},
+            {data: 'TglSpj', name: 'TglSpj', render: function(data,type,row) {
+                    data = '<i class="bx bxs-calendar-week bx-sm text-primary me-3"></i><small class="text-light">'+data+'</small>';
+                    return data;
+                }},
+            {data: 'uraian', name: 'uraian', render: function(data,type,row) {
+                    data = '</i><small>'+data+'</small>';
+                    return data;
+                }},
+            {data: 'BagianKodeKeg', name: 'BagianKodeKeg'},
+            {data: 'total_spj', name: 'total_spj', render: function(data,type,row) {
+                    data = '<i class="bx bxs-label bx-sm text-success me-3"></i><small>Rp. '+data+'</small>';
+                    return data;
+                }},
+            {data: 'Status', name: 'Status', orderable: false, searchable: false},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     }); 
@@ -862,6 +925,9 @@ $user = Auth::user();
         serverSide: true,
         order: [[ 1, 'asc' ]],
         ajax: "{{ route('pencairan.index') }}",
+        columnDefs: [
+        { className: 'dt-center', targets: [ 6 ] }
+        ],
         columns: [
           {  
             "data": null,
@@ -872,12 +938,25 @@ $user = Auth::user();
                 return meta.row + meta.settings._iDisplayStart + 1;
             }  
           }, 
-            {data: 'tanggal_spj', name: 'tanggal_spj'},
-            {data: 'uraian', name: 'uraian'},
-            {data: 'nama_bagian', name: 'nama_bagian'},
-            {data: 'kode_sub_kegiatan', name: 'kode_sub_kegiatan'},
-            {data: 'total_spj', name: 'total_spj'},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
+          {data: 'TglSpj', name: 'TglSpj', render: function(data,type,row) {
+                    data = '<i class="bx bxs-calendar-week bx-sm text-primary me-3"></i><small class="text-light">'+data+'</small>';
+                    return data;
+                }},
+          {data: 'TglCair', name: 'TglCair', render: function(data,type,row) {
+                    data = '<i class="bx bxs-calendar-week bx-sm text-primary me-3"></i><small class="text-light">'+data+'</small>';
+                    return data;
+                }},
+          {data: 'uraian', name: 'uraian', render: function(data,type,row) {
+                    data = '</i><small>'+data+'</small>';
+                    return data;
+                }},
+          {data: 'BagianKodeKeg', name: 'BagianKodeKeg'},
+          {data: 'total_spj', name: 'total_spj', render: function(data,type,row) {
+                    data = '<i class="bx bxs-label bx-sm text-success me-3"></i><small>Rp. '+data+'</small>';
+                    return data;
+                }},
+          {data: 'Download', name: 'Download', orderable: false, searchable: false},
+          {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     }); 
 
@@ -1373,10 +1452,45 @@ $('#username').blur(function(){
 });
 
 });
-
-
 </script>
+<script type="text/javascript">
+  var maxFilesizeVal = 12;
+    var maxFilesVal = 1;
 
+    // Note that the name "myDragAndDropUploader" is the camelized id of the form.
+    Dropzone.options.myDragAndDropUploader = {
+
+        paramName:"file",
+        maxFilesize: maxFilesizeVal, // MB
+        maxFiles: maxFilesVal,
+        resizeQuality: 1.0,
+        acceptedFiles: ".pdf",
+        addRemoveLinks: false,
+        timeout: 60000,
+        dictDefaultMessage: "Drop your files here or click to upload",
+        dictFallbackMessage: "Your  browser doesn't support drag and drop file uploads.",
+        dictFileTooBig: "File is too big. Max filesize: "+maxFilesizeVal+"MB.",
+        dictInvalidFileType: "Invalid file type. Only PDF files are allowed.",
+        dictMaxFilesExceeded: "You can only upload up to "+maxFilesVal+" files.",
+        maxfilesexceeded: function(file) {
+            this.removeFile(file);
+            // this.removeAllFiles(); 
+        },
+        sending: function (file, xhr, formData) {
+            $('#message').text('File Uploading...');
+        },
+        success: function (file, response) {
+            $('#message').text(response.success);
+            console.log(response.success);
+            console.log(response);
+        },
+        error: function (file, response) {
+            $('#message').text('Something Went Wrong! '+response);
+            console.log(response);
+            return false;
+        }
+    };
+</script>
 <!-- End Dynamic Button. -->
 
 </html>

@@ -160,6 +160,7 @@
             ->join('detail_spjs', 'spjs.id', '=', 'detail_spjs.spj_id')
             ->join('rekenings', 'rekenings.id', '=', 'detail_spjs.rekening_id')
             ->join('programs', 'programs.id', '=', 'detail_spjs.program_id')
+            ->join('pencairans', 'spjs.id', '=', 'pencairans.spj_id')
             ->select('spjs.tanggal_spj as tanggal_spj',
             'spjs.jenis_spj as jenis_spj',
             'spjs.uraian as uraian',
@@ -169,6 +170,8 @@
             'programs.nama_program as nama_program',
             'detail_spjs.rekening_id as rekening_id',
             'detail_spjs.program_id as program_id',
+            'pencairans.no_spm as no_spm',
+            'pencairans.no_sp2d as no_sp2d',
             )
             ->where('detail_spjs.rekening_id','=', $dp->rekening_id)
             ->where('detail_spjs.program_id','=', $dp->program_id)
@@ -186,6 +189,7 @@
             ->join('detail_spjs', 'spjs.id', '=', 'detail_spjs.spj_id')
             ->join('rekenings', 'rekenings.id', '=', 'detail_spjs.rekening_id')
             ->join('programs', 'programs.id', '=', 'detail_spjs.program_id')
+            ->join('pencairans', 'spjs.id', '=', 'pencairans.spj_id')
             ->select('spjs.tanggal_spj as tanggal_spj',
             'spjs.jenis_spj as jenis_spj',
             'spjs.uraian as uraian',
@@ -195,6 +199,8 @@
             'programs.nama_program as nama_program',
             'detail_spjs.rekening_id as rekening_id',
             'detail_spjs.program_id as program_id',
+            'pencairans.no_spm as no_spm',
+            'pencairans.no_sp2d as no_sp2d',
             )
             ->where('detail_spjs.rekening_id','=', $dp->rekening_id)
             ->where('detail_spjs.program_id','=', $dp->program_id)
@@ -218,8 +224,10 @@
                     @php
                     $jm=$dt->satuan*$dt->harga
                     @endphp
-                    {{ $dt->tanggal_spj }} | {{ $dt->jenis_spj }} <br> {{ $dt->uraian }} <br>
-                    Qty / Harga : {{ $dt->satuan }} x Rp. {{ number_format(round($dt->harga),0) }}
+                    {{ $dt->uraian }} <br>
+                    No SPM : {{ $dt->no_spm }} <br> No SP2D : {{ $dt->no_sp2d }} <br>
+                    Qty / Harga : {{ $dt->satuan }} x Rp. {{ number_format(round($dt->harga),0) }} | {{ $dt->tanggal_spj
+                    }} | {{ $dt->jenis_spj }}
                 </td>
                 <td>Rp. {{ number_format(round($jm),0) }}</td>
                 <td></td>

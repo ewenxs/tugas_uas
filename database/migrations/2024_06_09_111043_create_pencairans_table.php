@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('tgl_pencairan');
             $table->string('no_spm');
             $table->string('no_sp2d');
+            $table->string('files');
             $table->timestamps();
         });
     }

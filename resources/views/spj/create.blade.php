@@ -21,7 +21,6 @@
         <form action="/spj" method="POST">
           @csrf
           <div class="row">
-
             <div class="col-md-6">
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Tanggal SPJ</label>
@@ -127,9 +126,6 @@
                   </div>
                 </div>
               </div>
-
-
-
             </div>
             <div class="mb-3">
               <button type="submit" class="btn btn-primary">Simpan</button>
